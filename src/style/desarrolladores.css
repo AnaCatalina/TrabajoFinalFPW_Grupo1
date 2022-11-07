@@ -1,0 +1,34 @@
+.fotoPerfil{
+    width: 300;
+    height: 300;
+    margin: auto;
+}
+
+.fondoDevs{
+    background-image: url(../img/background.jpg);
+}
+
+.cardDev{
+    text-align: center;
+    min-width: 300px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.nameDev{
+    background: linear-gradient(to left, rgb(197, 0, 0), rgb(252, 115, 42), rgb(197, 0, 0));
+    padding: 0;
+    margin: 0;
+}
+
+.headerDev{
+    background: linear-gradient(to left, rgb(197, 0, 0), rgb(252, 115, 42), rgb(197, 0, 0));
+    border: 5px solid rgb(0, 0, 0);
+    padding: 0px;
+    text-align: center;
+    text-decoration-color: aliceblue;
+    margin-bottom: 20px;
+}
+.headerDev h1{
+    background: rgba(255, 255, 255, 0);
+}
