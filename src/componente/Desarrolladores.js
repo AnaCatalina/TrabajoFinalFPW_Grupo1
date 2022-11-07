@@ -1,32 +1,31 @@
-import '../style/desarrolladores.css';
+import { Container, Row, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import "../style/desarrolladores.css"
+import React from "react";
 import HeaderDevs from './desarrolladores/HeaderDevs';
 import DevsMain from './desarrolladores/DevsMain';
-import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
-import desarrolladores from '../json/desarrolladores.json';
+import desarrolladores from "../json/desarrolladores.json"
 
-function Desarrolladores() {
+export default function Desarrolladores() {
     return (
-        <>
-            <div className="container-fluid">
-                <HeaderDevs />
+        <Container className='fondoDevs'>
+            <Button variant="warning" >
+                    <Link to='/' className="btn btn-principal">Volver</Link>
+                </Button>
+            <Row>
                 
-                {desarrolladores.map(devs =>
-                    <DevsMain 
-                    perfil={devs.perfil}
-                    nombre={devs.nombre}
-                    edad={devs.edad}
-                    intereses={devs.intereses}
-                    linkGit={devs.linkGit}
+                <HeaderDevs></HeaderDevs>
+                {desarrolladores.map( devs =>
+                    <DevsMain
+                        perfil = {devs.perfil}
+                        nombre = {devs.nombre}
+                        edad = {devs.edad}
+                        intereses = {devs.intereses}
+                        linkGit = {devs.linkGit}
+                        className = "mainDev"
                     />
                 )}
-                <Button variant="warning" >
-                    <Link to='/' className="btn btn-principal">Volver</Link>
-                </Button>            
-            </div>
-
-        </>
+            </Row>
+        </Container >
     )
 };
-
-export default Desarrolladores
