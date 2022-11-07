@@ -5,6 +5,7 @@
         "edad": 20,
         "intereses": "Programar y animar videojuegos",
         "linkGit": "https://github.com/AnaCatalina"
+
     },
     {
         "perfil": "./img/desarrolladores/estrada.png",
@@ -19,6 +20,7 @@
         "edad": 22,
         "intereses": "Escalada, ajedrez, anime y videojuegos",
         "linkGit": "https://github.com/ChArLeS090800"
+
     },
     {
         "perfil": "./img/desarrolladores/robles.jpg",

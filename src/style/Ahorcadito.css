@@ -1,0 +1,33 @@
+body {
+   /* background-image: url(../img/fondo.png);*/
+    text-align: center;
+    border: 5px solid;
+    padding: auto;
+    margin: auto;
+    font-size: x-large;
+}
+
+.Container {
+    border: 5px;
+    padding: 1px;
+    margin: 0% 15% 10px;
+    padding-bottom: auto;
+    display: inline-block;
+}
+
+.letra {
+    border: 5px solid;
+    font-size: 5em;
+    font-style: normal;
+    font-weight: 100;;
+}
+
+
+h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: auto;
+    background: linear-gradient( rgb(199, 73, 73), rgb(252, 115, 42), rgb(197, 0, 0));
+    display: inline-block;
+    border: 5px;
+}
