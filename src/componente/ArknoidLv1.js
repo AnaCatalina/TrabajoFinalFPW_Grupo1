@@ -1,11 +1,13 @@
 import Escene from "./JuegoArknoid/Escene";
+import Escene2 from "./JuegoArknoid/Escene2";
 import sonido1 from '../sounds/sonido1.mp3';
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
-import Win from "./JuegoArknoid/Win";
+import Win2 from "./JuegoArknoid/Win2";
 import Gameover from "./JuegoArknoid/GameOver";
+import Gameover2 from "./JuegoArknoid/GameOver2";
 
 function Juego(){
     
@@ -29,7 +31,7 @@ useEffect(() => {
                 gravity: { y: 100 }
             }
         },
-        scene: [Escene, Win, Gameover ]    
+        scene: [Escene, Gameover,Escene2,Gameover2, Win2 ]    
     };
    
     var game = new Phaser.Game(config);
@@ -46,7 +48,7 @@ useEffect(() => {
 },[listo]);
     return(
         <Button variant="warning" >
-        <Link to='/' className="btn btn-principal"  onClick={play}>Volver</Link>
+        <Link to='/MenuAknoid' className="btn btn-principal"  onClick={play}>Volver</Link>
     </Button>
     )
 

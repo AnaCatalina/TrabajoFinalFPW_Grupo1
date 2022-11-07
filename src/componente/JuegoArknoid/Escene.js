@@ -48,7 +48,7 @@ class Escene extends Phaser.Scene {
         //se crea los bloques
         this.bloques = this.physics.add.staticGroup({
             key: ['bloqueAzul', 'bloqueRojo', 'bloqueAmarillo'],
-            frameQuantity: 10,
+            frameQuantity: 1,
             gridAlign: { width: 10, height: 10, cellWidth: 64, cellHeight: 32, x: 112, y: 50 }
         });
 

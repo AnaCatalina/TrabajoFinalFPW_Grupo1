@@ -35,7 +35,8 @@ class Escene2 extends Phaser.Scene {
 
         this.sonido2 = this.sound.add('nivel2');
         const soundConfig = {
-            loop: true
+            loop: true,
+            volume: 0.5
         }
 
         this.sonido2.play(soundConfig)
@@ -51,7 +52,7 @@ class Escene2 extends Phaser.Scene {
         //se crea los bloques
         this.bloques = this.physics.add.staticGroup({
             key: ['bloqueAzul', 'bloqueRojo', 'bloqueAmarillo','bloqueVerde', 'bloqueNaranja', 'bloqueVioleta'],
-            frameQuantity: 10,
+            frameQuantity: 1,
             gridAlign: { width: 10, height: 10, cellWidth: 64, cellHeight: 32, x: 112, y: 50 }
         });
 
@@ -92,7 +93,7 @@ class Escene2 extends Phaser.Scene {
      felicitar(){
         this.sonido2.stop();
         this.puntaje=0;
-        this.scene.start("Win2");     
+        this.scene.start("Win");     
     }
 
     //Método que permite aumentar el puntaje

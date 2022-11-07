@@ -1,6 +1,6 @@
-.fotoPerfil{
-    width: 300;
-    height: 300;
+.mainDev img{
+    max-width: 300;
+    max-height: 300;
     margin: auto;
 }
 
