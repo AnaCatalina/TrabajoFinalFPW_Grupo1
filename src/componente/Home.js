@@ -1,6 +1,6 @@
 import "../style/Home.css";
 import { Link } from "react-router-dom";
-import Inicio from "../img/fondo.jpg";
+import Inicio from "../img/fondoArk.jpg";
 import Button from "react-bootstrap/Button";
 import sonido1 from '../sounds/sonido1.mp3';
 

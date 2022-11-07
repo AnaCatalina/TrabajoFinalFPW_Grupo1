@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './componente/Home';
 import JuegoArknoidLv1 from "./componente/ArknoidLv1";
 import Juego2 from './componente/ArknoidLv2';

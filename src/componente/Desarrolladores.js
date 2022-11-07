@@ -1,8 +1,8 @@
-import '../styles/desarrolladores.css';
+import '../style/desarrolladores.css';
 import HeaderDevs from './desarrolladores/HeaderDevs';
 import DevsMain from './desarrolladores/DevsMain';
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Desarrolladores() {
     return (

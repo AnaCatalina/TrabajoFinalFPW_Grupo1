@@ -1,18 +1,13 @@
 
 import { useEffect } from "react";
-import "../../styles/Ahorcadito.css";
+import "../../style/Ahorcadito.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import React from 'react';
 
 let contador = 0;
-//let acertar = false;
+
 function Juego({ palabraArreglo, letra, palabraAAdivinar }) {
-
-
-  
- // const [contador, setContador] = useState(0)
- // const [estado, setEstado] = useState(false)
 
   useEffect(() => {
 
