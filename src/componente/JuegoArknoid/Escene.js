@@ -89,7 +89,7 @@ class Escene extends Phaser.Scene {
     felicitar(){
        this.sonido1.stop();
        this.puntaje=0;
-       this.scene.start("Win");     
+       this.scene.start("Escene2");     
    }
 
     //Método que permite aumentar el puntaje

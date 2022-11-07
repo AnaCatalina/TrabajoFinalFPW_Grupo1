@@ -4,6 +4,7 @@ import Inicio from "../img/fondo.jpg";
 import Button from "react-bootstrap/Button";
 import sonido1 from '../sounds/sonido1.mp3';
 
+
 export default function Home(){
 
     function play(){
@@ -16,12 +17,17 @@ export default function Home(){
             
             <div className="d-grid gap-2 col-6 mx-auto " >
                 <Button variant="outline-success" size="lg" >
-                    <Link to='/juego' className="btn btn-principal" onClick={play}>Jugar Nivel 1</Link>
+                    <Link to='/piedraPapelTijera' className="btn btn-principal" onClick={play}>Jugar Piedra Papel o Tijera</Link>
+                </Button>
+                <Button variant="outline-success" size="lg" >
+                    <Link to='/ahorcadito' className="btn btn-principal" onClick={play}>Jugar Ahorcadito</Link>
+                </Button>
+                <Button variant="outline-success" size="lg" >
+                    <Link to='/arknoid' className="btn btn-principal" onClick={play}>Jugar Arknoid</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
-                    <Link to='/juego2' className="btn btn-principal" onClick={play}>Jugar Nivel 2</Link>
-                </Button>
-               
+                    <Link to='/desarrolladores' className="btn btn-principal" onClick={play}>Conocenos</Link>
+                </Button>               
             </div>
         </div>
         

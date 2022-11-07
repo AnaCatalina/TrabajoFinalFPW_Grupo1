@@ -1,0 +1,37 @@
+[
+    {
+        "perfil": "./img/desarrolladores/boccardo.png",
+        "nombre": "Ana Catalina Boccardo",
+        "edad": "Edad: 20",
+        "intereses": "Intereses: Programar y animar videojuegos",
+        "linkGit": "Link GitHub: https://github.com/AnaCatalina"
+    },
+    {
+        "perfil": "./img/desarrolladores/estrada.png",
+        "nombre": "Lautaro Estrada",
+        "edad": "Edad: 27",
+        "intereses": "Intereses: Softcombat, juegos de rol, manga anime, taekwondo y literatura",
+        "linkGit": "Link GitHub: https://github.com/estradalautaro"
+    },
+    {
+        "perfil": "./img/desarrolladores/robles.jpg",
+        "nombre": "Elias David Robles",
+        "edad": "Edad: 27",
+        "intereses": "Intereses: Historia y música de Videojuegos",
+        "linkGit": "Link GitHub: https://github.com/EliasDRobles"
+    },
+    {
+        "perfil": "./img/desarrolladores/valdez.png",
+        "nombre": "Fabian Valdez",
+        "edad": "Edad: 25",
+        "intereses": "Intereses: Jugar a la pelota con amigos",
+        "linkGit": "Link GitHub: https://github.com/fab1997"
+    },
+    {
+        "perfil": "./img/desarrolladores/farfanjpg",
+        "nombre": "Javier Farfán",
+        "edad": "Edad: 22",
+        "intereses": "Intereses: Escalada, ajedrez, anime y videojuegos",
+        "linkGit": "Link GitHub: https://github.com/ChArLeS090800"
+    }
+]

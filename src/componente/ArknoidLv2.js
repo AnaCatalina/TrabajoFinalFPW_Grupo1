@@ -1,11 +1,11 @@
-import Escene2 from "./Juego/Escene2";
+import Escene2 from "./JuegoArknoid/Escene2";
 import sonido1 from '../sounds/sonido1.mp3';
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
-import Win2 from "./Juego/Win2";
-import Gameover2 from "./Juego/GameOver2";
+import Win2 from "./JuegoArknoid/Win2";
+import Gameover2 from "./JuegoArknoid/GameOver2";
 
 function Juego2(){
     
