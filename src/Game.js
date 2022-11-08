@@ -6,6 +6,7 @@ import ArknoidLv2 from './componente/ArknoidLv2';
 import Desarrolladores from './componente/Desarrolladores';
 import Ahorcadito from './componente/Ahorcadito';
 import PiedraPapelTijera from './componente/PiedraPapelTijera';
+import JuegoMemoria from './componente/JuegoMemoria';
 
 
 function Game() {
@@ -20,6 +21,7 @@ function Game() {
         <Route path='/MenuAknoid' element={<MenuArknoid/>}/>        
         <Route path='/Aknoid1' element={<ArknoidLv1/>}/>
         <Route path='/Aknoid2' element={<ArknoidLv2/>}/>
+        <Route path='JuegoMemoria' element={<JuegoMemoria/>}/>
       </Routes>
     </Router>
     

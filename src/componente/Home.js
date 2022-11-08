@@ -26,7 +26,7 @@ export default function Home(){
                     <Link to='/MenuAknoid' className="btn btn-principal" onClick={play}>Jugar Arknoid</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
-                    <Link to='/' className="btn btn-principal" onClick={play}>Jugar JuegoReact</Link>
+                    <Link to='/juegoMemoria' className="btn btn-principal" onClick={play}>Jugar Juego de la Memoria</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
                     <Link to='/' className="btn btn-principal" onClick={play}>Jugar JuegoPhaser</Link>
