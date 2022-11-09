@@ -29,7 +29,7 @@ export default function Home(){
                     <Link to='/juegoMemoria' className="btn btn-principal" onClick={play}>Jugar Juego de la Memoria</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
-                    <Link to='/' className="btn btn-principal" onClick={play}>Jugar JuegoPhaser</Link>
+                    <Link to='/JuegoPhaser' className="btn btn-principal" onClick={play}>Jugar JuegoPhaser</Link>
                 </Button> 
                 <Button variant="outline-danger" size="lg" >
                     <Link to='/desarrolladores' className="btn btn-principal" onClick={play}>Conocenos</Link>

@@ -7,6 +7,7 @@ import Desarrolladores from './componente/Desarrolladores';
 import Ahorcadito from './componente/Ahorcadito';
 import PiedraPapelTijera from './componente/PiedraPapelTijera';
 import JuegoMemoria from './componente/JuegoMemoria';
+import JuegoPhaser from './componente/JuegoPhaser'
 
 
 function Game() {
@@ -22,6 +23,7 @@ function Game() {
         <Route path='/Aknoid1' element={<ArknoidLv1/>}/>
         <Route path='/Aknoid2' element={<ArknoidLv2/>}/>
         <Route path='JuegoMemoria' element={<JuegoMemoria/>}/>
+        <Route path='/JuegoPhaser' element={<JuegoPhaser/>}/>
       </Routes>
     </Router>
     
