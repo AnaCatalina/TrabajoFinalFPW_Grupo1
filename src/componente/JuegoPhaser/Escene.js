@@ -27,7 +27,8 @@ class Escene extends Phaser.Scene {
 
     create() {
         //creando el fondo
-        this.add.image(400, 300, "fondo");
+        this.add.tileSprite(480, 320, 960, 640, 'fondo').
+        setScrollFactor(0);//esto nos permitira crear un fondo infinito
 
         this.sonido1 = this.sound.add('nivel1');
         const soundConfig = {
@@ -130,7 +131,10 @@ class Escene extends Phaser.Scene {
         )
     }
 
-    update() {
+    update(time) {
+        //movimiento del fondo
+        this.bg.tilePositionX = time*0.1;
+        
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
