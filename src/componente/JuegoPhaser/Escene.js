@@ -27,7 +27,7 @@ class Escene extends Phaser.Scene {
 
     create() {
         //creando el fondo
-        this.add.tileSprite(480, 320, 960, 640, 'fondo').
+        this.background.tileSprite(480, 320, 960, 640, 'fondo').
         setScrollFactor(0);//esto nos permitira crear un fondo infinito
 
         this.sonido1 = this.sound.add('nivel1');
