@@ -78,9 +78,11 @@ class Escene extends Phaser.Scene {
         //    this.createEnemy()
         //}
 
-        for (let i = 0; i < cantENEMIGOS; i++){
-            this.createEnemy(i)
-        }
+        //for (let i = 0; i < cantENEMIGOS; i++){
+            //this.createEnemy()
+        //}
+
+        this.createEnemy()
 
     }
 
@@ -88,21 +90,25 @@ class Escene extends Phaser.Scene {
         this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
     }
 
-    createEnemy(i) {
-        // Se crea una variable randomY que almacenará un valor entre 30 y 550
-        var randomY = Phaser.Math.Between(30,550);
+    createEnemy() {
 
-        var distanciaX = 900;
-        // Se crea la nave enemiga
-        this.enemy = this.physics.add.sprite(distanciaX + i * 100, randomY, "enemy").setImmovable();
-
+        this.enemys = this.physics.add.group();
         
+        
+        for (let i = 0; i < cantENEMIGOS; i++){
+            // Se crea una variable randomY que almacenará un valor entre 30 y 550
+           
+            this.enemys.create(0, 0, "enemy");
+
+        }
+        // Se crea la nave enemiga
+        //this.enemy = this.physics.add.sprite(distanciaX + i * 100, randomY, "enemy").setImmovable();
         // Se cancela la gravedad
-        this.enemy.body.allowGravity = false;
+        //this.enemys.body.allowGravity = false;
         // Se cancela el choque contra bordes
-        this.enemy.setCollideWorldBounds(false);
+        //this.enemy.setCollideWorldBounds(false);
         // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
-        this.enemy.setVelocityX(-200);
+        this.enemys.setVelocityX(-150);
         // Detectamos cuando la nave enemiga sale de la pantalla
         //this.enemy.checkWorldBounds = true;
         // ... Y luego lo eliminamos
@@ -110,6 +116,19 @@ class Escene extends Phaser.Scene {
         // Cada 2000 milisegundos llamaremos de nuevo a esta función para que genere un nuevo enemigo
         //this.time.delayedCall(5000, this.enemy, [], this);
     };
+
+    reciclarEnemigos(){
+        const enemigosTemporales = [];
+        var distanciaX = 900;
+        var randomY = Phaser.Math.Between(30,550);
+        this.enemys.getChildren.forEach(
+            enemy => () {
+                //enemigosTemporales.push(enemigo);
+                enemy.x = distanciaX;
+                enemy.y = randomY;
+            }
+        )
+    }
 
     update() {
         //Movimiento de la nave
@@ -133,7 +152,9 @@ class Escene extends Phaser.Scene {
             this.nave.anims.play('normal')
         }
 
-        //this.time.delayedCall(5000, this.createEnemy(), [], this);
+        this.reciclarEnemigos();
+
+
 
 
         this.inputKeys.forEach(key => {

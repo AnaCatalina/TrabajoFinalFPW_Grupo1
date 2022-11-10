@@ -26,7 +26,7 @@ useEffect(() => {
         physics: {
             default: 'arcade',
             arcade: {
-                gravity: { x: 100 }
+                gravity: { x: 0 }
             }
         },
         scene: [Escene/*, Gameover, Win*/ ]    
