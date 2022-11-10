@@ -1,14 +1,20 @@
 import React from "react";
 import vuelta from '../../img/imgJuegoMenoria/atrascarta.png';
+import Img from './ImgCarta';
 
+export default function Carta(props){
 
-const Carta = ()=>{
 return(
-    <div className="carta rotate" >
-        <img className="img-carta" src={vuelta} alt='vuelta'/>
+    <div className="carta">
+        <div className="carta-- inner">
+            <div className="carta -- frontal ">
+            </div>
+            <div className="carta -- atras ">
+              <i className= {props.imagen}></i>
+            </div>
+        </div>
     </div>
 );
 
-}
 
-export default Carta;
+}

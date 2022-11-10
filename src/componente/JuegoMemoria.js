@@ -1,38 +1,35 @@
-import React from "react";
-import '../style/JuegoMemoria.css';
-import Carta from './JuegoDeMemoria/Carta';
-import { useEffect, useState } from 'react';
 
-import {imagen} from './JuegoDeMemoria/ImgCarta';
+import PantallaInicial from './JuegoDeMemoria/PantallaInicial';
+import Juego from './JuegoDeMemoria/Juego';
+import Win from './JuegoDeMemoria/Win';
+import { useState } from 'react';
 
-function JuegoMemoria(){
 
-const[card, setCard]= useState([]);
+export default function JuegoMemoria(){
+     // variables de estado
+     const[level, setLevel]= useState(0)
+     const [estadoJuego, setEstadoJuego] = useState(0)
+        // cambio de dificultad
+     const cambioLevel = () => {
+        setLevel(level === 2 ? 0 : level + 1)
+     }
+     // determinar el estado del juego
+     const cambioEstadoJuego = (value) =>{
+        setEstadoJuego(value)
 
-useEffect(() => {
+     }
 
-setCard(imagen);
 
-}, []);
-
-return (
-    <div className="juegoM">
-        <div className=" contenedor-cartas">
-        {
-            card.map((card) => (
-                <Carta/>
-            ))
-        }
+    return(
+        <div>
+            { estadoJuego ===0 ?
+            <PantallaInicial 
+            level = {level} 
+            cambioLevel={cambioLevel} 
+            setStart = {cambioEstadoJuego}
+            /> : <Juego/>
+        }  
+        <Win/>
         </div>
-
-    </div>
-
-
-
-);
-
-
-
-
+    );
 }
-export default JuegoMemoria;

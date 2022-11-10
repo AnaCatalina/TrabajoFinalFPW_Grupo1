@@ -1,81 +1,19 @@
-import perro from '../../img/imgJuegoMenoria/Perrito.png';
-import caballo from '../../img/imgJuegoMenoria/caballo.png';
-import cerdo from '../../img/imgJuegoMenoria/cerdo.png';
-import elefante from '../../img/imgJuegoMenoria/Elefante.png';
-import gato from '../../img/imgJuegoMenoria/gato.png';
-import oso from '../../img/imgJuegoMenoria/oso.png';
-import pinguino from '../../img/imgJuegoMenoria/Pinguino.png';
-import pulpo from '../../img/imgJuegoMenoria/pulpo.png';
+import {FontAwesomeIco} from '@fortawesome/free-solid-svg-icons'
+
+const imagen = {
+    0: 'fas fa-horse',
+    1: 'fas fa-ambulance',
+    2: 'fas fa-apple-alt',
+    3: 'fas fa-bug',
+    4: 'fas fa-clinic-medical',
+    5: 'fas fa-award',
+    6: 'fas fa-tractor',
+    7: 'fas fa-bomb',
+    8: 'fas fa-lock',
+    9: 'fas fa-archway',
+    10: 'fas fa-palette',
+    11: 'fas fa-coffee',
+}
 
 
-
-const imagen = [
-{
- perro: perro,
- name: 'P'
-},
-{
- perro: perro,
- name: 'P'
-},
-{
-caballo: caballo,
-  name: 'C'
-},
-{
-    caballo: caballo,
-    name: 'C'
-},
-{
-    cerdo: cerdo,
-    name: 'Cdo'
-},
-{
-    cerdo: cerdo,
-    name: 'Cdo'
-},
-{
-    elefante: elefante,
-    name: 'E'
-},
-{
-    elefante: elefante,
-    name: 'E'
-},
-{
-    gato: gato,
-    name:'G'
-},
-{
-    gato: gato,
-    name:'G'
-},
-{
-    oso: oso,
-    name:'O'
-},
-{
-    oso: oso,
-    name:'O'
-},
-{
-    pinguino: pinguino,
-    name:'Pin'
-},
-{
-    pinguino: pinguino,
-    name:'Pin'
-},
-{
-    pulpo: pulpo,
-    name:'Pul'
-},
-{
-    pulpo: pulpo,
-    name:'Pul'
-},
-
-];
-
-
-export {imagen}
+export default imagen
