@@ -27,7 +27,7 @@ class Escene extends Phaser.Scene {
 
     create() {
         //creando el fondo
-        this.background.tileSprite(480, 320, 960, 640, 'fondo').
+        this.background = this.add.tileSprite(400, 300, 800, 600, 'fondo').
         setScrollFactor(0);//esto nos permitira crear un fondo infinito
 
         this.sonido1 = this.sound.add('nivel1');
@@ -121,10 +121,11 @@ class Escene extends Phaser.Scene {
     reciclarEnemigos(){
         const enemigosTemporales = [];
         var distanciaX = 900;
-        var randomY = Phaser.Math.Between(30,550);
-        this.enemys.getChildren.forEach(
-            enemy => () {
+        //var randomY = Phaser.Math.Between(30,550);
+        this.enemys.getChildren().forEach(
+            (enemy) => {
                 //enemigosTemporales.push(enemigo);
+                var randomY = Phaser.Math.Between(30,550);
                 enemy.x = distanciaX;
                 enemy.y = randomY;
             }
@@ -132,10 +133,7 @@ class Escene extends Phaser.Scene {
     }
 
     update(time) {
-        //movimiento del fondo
         this.background.tilePositionX = time*0.1;
-    }
-    update() {
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
