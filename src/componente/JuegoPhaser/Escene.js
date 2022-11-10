@@ -133,9 +133,9 @@ class Escene extends Phaser.Scene {
 
     update(time) {
         //movimiento del fondo
-        this.bg.tilePositionX = time*0.1;
+        this.background.tilePositionX = time*0.1;
     }
-    this.update(){
+    update() {
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
