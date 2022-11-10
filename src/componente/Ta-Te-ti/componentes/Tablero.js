@@ -2,11 +2,12 @@ import Cuadrado from "./Cuadrado";
 import "../style/Tablero.css";
 
 
-const Tablero = ({cuadrados, onClick, turno }) => {
+const Tablero = ({cuadrados, onClick, turno, lineaGanadora }) => {
 
     const crearCuadrados = values =>(
         values.map(value => (
             <Cuadrado 
+            gano={lineaGanadora.includes(value)}
             turno ={turno}
             onClick ={() => onClick(value)}
             value={cuadrados[value]}
