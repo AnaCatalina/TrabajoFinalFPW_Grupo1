@@ -1,0 +1,14 @@
+.cuadrado{
+    width: 100px;
+    height: 100px;
+    background-color: #848484;
+    margin: 5px;
+}
+.cuadrado--X{
+    background-color: #CD493A;
+    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+}
+.cuadrado--O{
+    background-color: black;
+    border-radius: 50%;
+}
