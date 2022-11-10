@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import GrupoDisparos from "./GrupoDisparos";
 
-
+const cantENEMIGOS = 10;
 class Escene extends Phaser.Scene {
     constructor() {
         super({ key: 'Inicio' });
@@ -14,6 +14,8 @@ class Escene extends Phaser.Scene {
     puntos = 10;
     sonido1 = null;
     disparo = null;
+
+    
 
     preload() {
         this.load.image("fondo", "imagen/juegoPhaser/background.png");
@@ -69,14 +71,48 @@ class Escene extends Phaser.Scene {
             frames: [ {key: 'nave' , frame: 1}],
             frameRate: 20
         });
+
+        //this.time.delayedCall(5000, this.createEnemy(), [], this);
+
+        //while(puntaje <= 100){
+        //    this.createEnemy()
+        //}
+
+        for (let i = 0; i < cantENEMIGOS; i++){
+            this.createEnemy(i)
+        }
+
     }
 
     disparar(){
         this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
     }
 
+    createEnemy(i) {
+        // Se crea una variable randomY que almacenará un valor entre 30 y 550
+        var randomY = Phaser.Math.Between(30,550);
+
+        var distanciaX = 900;
+        // Se crea la nave enemiga
+        this.enemy = this.physics.add.sprite(distanciaX + i * 100, randomY, "enemy").setImmovable();
+
+        
+        // Se cancela la gravedad
+        this.enemy.body.allowGravity = false;
+        // Se cancela el choque contra bordes
+        this.enemy.setCollideWorldBounds(false);
+        // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
+        this.enemy.setVelocityX(-200);
+        // Detectamos cuando la nave enemiga sale de la pantalla
+        //this.enemy.checkWorldBounds = true;
+        // ... Y luego lo eliminamos
+        //this.enemy.outOfBoundsKill = true;
+        // Cada 2000 milisegundos llamaremos de nuevo a esta función para que genere un nuevo enemigo
+        //this.time.delayedCall(5000, this.enemy, [], this);
+    };
+
     update() {
-        //Movimientos laterales de la plataforma
+        //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
             this.nave.anims.play('sube', true)
@@ -96,6 +132,9 @@ class Escene extends Phaser.Scene {
             this.nave.setVelocityX(0);
             this.nave.anims.play('normal')
         }
+
+        //this.time.delayedCall(5000, this.createEnemy(), [], this);
+
 
         this.inputKeys.forEach(key => {
             if(Phaser.Input.Keyboard.JustDown(key)){

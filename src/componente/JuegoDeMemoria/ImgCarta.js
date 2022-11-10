@@ -1,4 +1,4 @@
-import {FontAwesomeIco} from '@fortawesome/free-solid-svg-icons'
+//import {FontAwesomeIco} from '@fortawesome/free-solid-svg-icons'
 
 const imagen = {
     0: 'fas fa-horse',
