@@ -1,13 +1,11 @@
 import Phaser from "phaser";
+import GrupoDisparos from "./GrupoDisparos";
+
 
 class Escene extends Phaser.Scene {
     constructor() {
         super({ key: 'Inicio' });
     }
-
-    //Init(){
-    // this.puntos = 0;   
-    //}
 
     //Se emplean variables globales
     plataforms = null;
@@ -15,18 +13,16 @@ class Escene extends Phaser.Scene {
     puntaje = 0;
     puntos = 10;
     sonido1 = null;
+    disparo = null;
 
     preload() {
         this.load.image("fondo", "imagen/juegoPhaser/background.png");
-        this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", {frameWidth: 70, frameHeight: 62});
+        this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", {frameWidth: 69, frameHeight: 62});
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
-        /*this.load.image("bloqueAzul", "imagen/blue1.png");
-        this.load.image("bloqueRojo", "imagen/red1.png");
-        this.load.image("bloqueAmarillo", "imagen/yellow1.png");
-        this.load.image("ball", "imagen/ball1.png");*/
+        this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
         this.load.audio('nivel1', 'sonido/level1.mp3');
-
     }
+
     create() {
         //creando el fondo
         this.add.image(400, 300, "fondo");
@@ -44,22 +40,10 @@ class Escene extends Phaser.Scene {
             fontFamily: 'arial'
         });
 
+        //se crea el disparo
+        this.disparo = new GrupoDisparos(this);
 
-
-        //se crea los bloques
-        this.enemigo = this.physics.add.staticGroup({
-            key: ['enemigo'],
-            frameQuantity: 3,
-            gridAlign: { width: 70, height: 62, cellWidth: 62, cellHeight: 70, x: 400, y: 200 }
-        });
-
-        // se crea la pelota con sus fisicas
-        /*this.ball = this.physics.add.image(400, 480, "ball").setCollideWorldBounds(true).setBounce(1);
-        this.ball.setData('apagada', true);
-
-        const keyCodes = Phaser.Input.Keyboard.KeyCodes;
-        this.teclaA = this.input.keyboard.addKey(keyCodes.A);*/
-
+        this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
         // se crea la nave
         this.nave = this.physics.add. sprite(150, 300, "nave").setImmovable();
         // se cancela la gravedad
@@ -67,74 +51,39 @@ class Escene extends Phaser.Scene {
         this.nave.setCollideWorldBounds(true);
         // se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
-
-
-
-
-        /*this.physics.add.collider(this.ball, this.plataforms, this.contarColision, null, this);
-        this.physics.add.collider(this.ball, this.bloques, this.colisionPelotaBloque, null, this);*/
-
         this.physics.world.setBoundsCollision(true);
 
 
         this.anims.create({
-            key: 'up',
+            key: 'sube',
             frames: [ {key: 'nave' , frame: 2}],
             frameRate: 20
         });
         this.anims.create({
-            key: 'turn',
+            key: 'normal',
             frames: [ {key: 'nave' , frame: 0}],
             frameRate: 20
-        });
+        })
         this.anims.create({
-            key: 'down',
+            key: 'baja',
             frames: [ {key: 'nave' , frame: 1}],
             frameRate: 20
         });
     }
 
-    //Método que detecta colisión entre la pelota y los bloques
-    /*colisionPelotaBloque(ball, bloques) {
-        bloques.disableBody(true, true);
-        this.aumentarPuntaje();
-        if(this.bloques.countActive()===0){
-            this.felicitar();
-        }
-       }
-    felicitar(){
-       this.sonido1.stop();
-       this.puntaje=0;
-       this.scene.start("Escene2");     
-   }
-
-    //Método que permite aumentar el puntaje
-    aumentarPuntaje() {
-        this.puntaje = this.puntaje + this.puntos;
-        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
-        console.log(this.puntaje);
+    disparar(){
+        this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
     }
 
-    //Método que detecta colisión entre la pelota y la plataforma
-    contarColision(ball, plataforms) {
-        let lugarDeImpacto = ball.x - plataforms.x
-        if (lugarDeImpacto > 0) {
-            ball.setVelocityX(2 * lugarDeImpacto);
-        } else if (lugarDeImpacto < 0) {
-            ball.setVelocityX(2 * lugarDeImpacto);
-        } else {
-            ball.setVelocityX(Phaser.Math.Between(-10, 10))
-        }
-    }*/
     update() {
         //Movimientos laterales de la plataforma
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
-            this.nave.anims.play('up', true)
+            this.nave.anims.play('sube', true)
         }
         else if (this.cursors.down.isDown) {
             this.nave.setVelocityY(300);
-            this.nave.anims.play('down', true)
+            this.nave.anims.play('baja', true)
         }
         else if (this.cursors.left.isDown) {
             this.nave.setVelocityX(-300);
@@ -145,26 +94,17 @@ class Escene extends Phaser.Scene {
         else {
             this.nave.setVelocityY(0);
             this.nave.setVelocityX(0);
-            this.nave.anims.play('turn')
+            this.nave.anims.play('normal')
         }
-        /*if (this.ball.getData('apagada')) {
-            this.ball.x = this.plataforms.x;
 
-        }
-        if (this.cursors.space.isDown && this.ball.getData('apagada', true)) {
-            this.ball.setVelocity(50, -450);
-            this.ball.setData('apagada', false);
-        }
-        if (this.ball.y > 600) {
-            this.sonido1.stop();
-            this.puntaje=0;
-            this.mostrarGameover();
-        }*/
+        this.inputKeys.forEach(key => {
+            if(Phaser.Input.Keyboard.JustDown(key)){
+                this.disparar();
+            }
+            
+        });
+
     }
-
-    /*mostrarGameover() {
-        this.scene.start('GameOver')
-    }*/
 }
 
 export default Escene;
