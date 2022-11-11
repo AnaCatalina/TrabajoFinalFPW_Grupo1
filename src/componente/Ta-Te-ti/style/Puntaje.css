@@ -1,0 +1,19 @@
+.puntaje-tablero{
+        width: 500px;
+        display: grid;
+        grid-auto-flow: column;
+        margin-top: 20px;
+
+}
+.puntaje-tablero div{
+    color: aliceblue;
+    text-align: center;
+    font-size: medium;
+    padding: 5px;
+    font-weight: bold;
+    background-color: darkcyan;
+
+}
+.puntaje-tablero div:first-child{
+    background-color: hsl(241, 88%, 34%);;
+}
