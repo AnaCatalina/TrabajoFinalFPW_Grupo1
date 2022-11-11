@@ -1,5 +1,5 @@
-import Cuadrado from "./Cuadrado";
-import "../style/Tablero.css";
+import Cuadrado from "../Ta-Te-ti/Cuadrado";
+import "../Ta-Te-ti/style/Tablero.css";
 
 
 const Tablero = ({cuadrados, onClick, turno, lineaGanadora }) => {
