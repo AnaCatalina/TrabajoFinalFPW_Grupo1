@@ -17,9 +17,10 @@ export default class Disparo extends Phaser.Physics.Arcade.Sprite
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        if (this.x>=845){
+        if (this.x>=790){
             this.setActive(false);
             this.setVisible(false);
+            this.disableBody(true, true);
         }
     }
 }

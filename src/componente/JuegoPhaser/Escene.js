@@ -23,8 +23,10 @@ class Escene extends Phaser.Scene {
         this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", { frameWidth: 69, frameHeight: 62 });
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
-        this.load.audio('nivel1', 'sonido/2022/2022Lv1.mp3');
+        this.load.audio('nivel1', 'sonido/2022/nivel1.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');
+        this.load.audio('impacto', 'sonido/2022/impact.mp3');
     }
 
     create() {
@@ -41,6 +43,12 @@ class Escene extends Phaser.Scene {
         this.sonidoShot = this.sound.add('sonidoDisparo'), {
             loop: false
         }
+        this.sonidoExplosion = this.sound.add('explosion'), {
+            loop: false
+        }
+        this.sonidoImpacto = this.sound.add('impacto'), {
+            loop: false
+        }
 
         this.sonido1.play(soundConfig)
 
@@ -51,6 +59,11 @@ class Escene extends Phaser.Scene {
         });
 
         this.vidaEnTexto = this.add.text(10, 30, 'Vida: 100 %', {
+            fontSize: '20px',
+            fill: 'red',
+            fontFamily: 'arial'
+        });
+        this.nivel = this.add.text(725, 10, 'Nivel 1', {
             fontSize: '20px',
             fill: 'red',
             fontFamily: 'arial'
@@ -111,12 +124,16 @@ class Escene extends Phaser.Scene {
     };
 
     destroyEnemy(disparo, enemys) {
+        this.sonidoExplosion.play()
         this.aumentarPuntaje();
         enemys.disableBody(true, true);
+        this.disparo.setActive(false);
+        //this.disparo.setVisible(false);
         disparo.disableBody(true, true);
     }
 
     destroyJugador(nave, enemys) {
+        this.sonidoImpacto.play()
         this.disminuirVida();
         enemys.disableBody(true, true);
     }
@@ -144,7 +161,7 @@ class Escene extends Phaser.Scene {
 
     //Método que permite disminuír la vida
     disminuirVida() {
-        this.vida = this.vida - this.puntos * 3;
+        this.vida = this.vida - this.puntos * 2.5;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
         console.log(this.vida);
         if(this.vida <= 0){

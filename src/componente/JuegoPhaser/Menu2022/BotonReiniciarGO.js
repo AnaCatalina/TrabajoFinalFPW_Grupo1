@@ -1,13 +1,13 @@
 export class BotonResetGO{
     constructor(escena){
-        this.escenaR = escena;
+        this.escenaRst = escena;
     }
     precargar(){
         
-        this.escenaR.load.spritesheet('boton','imagen/juegoPhaser/menu/BotonReinicio.png',{frameWidth: 200 ,frameHeight: 79});
+        this.escenaRst.load.spritesheet('boton','imagen/juegoPhaser/menu/BotonReinicio.png',{frameWidth: 200 ,frameHeight: 79});
     }
     crear(){
-        this.botoninicio = this.escenaR.add.sprite(400,500,'boton').setInteractive();
+        this.botoninicio = this.escenaRst.add.sprite(400,500,'boton').setInteractive();
 
         this.botoninicio.on('pointerover', () => {
             this.botoninicio.setFrame(1);
@@ -18,7 +18,7 @@ export class BotonResetGO{
         });
 
         this.botoninicio.on('pointerdown', () => {
-            this.escenaR.scene.start('Inicio')
+            this.escenaRst.scene.start('Inicio')
 
         });
 

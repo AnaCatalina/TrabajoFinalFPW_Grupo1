@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import {BotonReset} from './BotonReiniciar'
 
-class Win extends Phaser.Scene{
+class WinLv1 extends Phaser.Scene{
     constructor(){
         super({key:"WinLv1"});
         this.reset = new BotonReset(this);
@@ -22,4 +22,4 @@ class Win extends Phaser.Scene{
         this.sonido4.play(soundConfig)
     }
 }
-export default Win;
+export default WinLv1;
