@@ -1,34 +1,34 @@
 import Phaser from "phaser";
+import Disparo from "./Disparo";
 import GrupoDisparos from "./GrupoDisparos";
 
-const cantENEMIGOS = 10;
+var cantENEMIGOS = 15;
+var score = 0;
+var scoreText;
 class Escene extends Phaser.Scene {
     constructor() {
         super({ key: 'Inicio' });
     }
 
-    //Se emplean variables globales
-    plataforms = null;
+    // Se emplean variables globales
     cursors = null;
     puntaje = 0;
     puntos = 10;
     sonido1 = null;
     disparo = null;
 
-    
-
     preload() {
         this.load.image("fondo", "imagen/juegoPhaser/background.png");
-        this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", {frameWidth: 69, frameHeight: 62});
+        this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", { frameWidth: 69, frameHeight: 62 });
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
         this.load.audio('nivel1', 'sonido/level1.mp3');
     }
 
     create() {
-        //creando el fondo
+        // Creando el fondo
         this.background = this.add.tileSprite(400, 300, 800, 600, 'fondo').
-        setScrollFactor(0);//esto nos permitira crear un fondo infinito
+            setScrollFactor(0); // Esto nos permitira crear un fondo infinito
 
         this.sonido1 = this.sound.add('nivel1');
         const soundConfig = {
@@ -43,97 +43,85 @@ class Escene extends Phaser.Scene {
             fontFamily: 'arial'
         });
 
-        //se crea el disparo
+        // Se crea el disparo
         this.disparo = new GrupoDisparos(this);
 
-        this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
-        // se crea la nave
-        this.nave = this.physics.add. sprite(150, 300, "nave").setImmovable();
-        // se cancela la gravedad
+        this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
+        // Se crea la nave
+        this.nave = this.physics.add.sprite(150, 300, "nave").setImmovable();
+        // Se cancela la gravedad
         this.nave.body.allowGravity = false;
         this.nave.setCollideWorldBounds(true);
-        // se agrega un objeto para mover la plataforma
+        // Se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setBoundsCollision(true);
 
-
         this.anims.create({
             key: 'sube',
-            frames: [ {key: 'nave' , frame: 2}],
+            frames: [{ key: 'nave', frame: 2 }],
             frameRate: 20
         });
         this.anims.create({
             key: 'normal',
-            frames: [ {key: 'nave' , frame: 0}],
+            frames: [{ key: 'nave', frame: 0 }],
             frameRate: 20
         })
         this.anims.create({
             key: 'baja',
-            frames: [ {key: 'nave' , frame: 1}],
+            frames: [{ key: 'nave', frame: 1 }],
             frameRate: 20
         });
 
-        //this.time.delayedCall(5000, this.createEnemy(), [], this);
+        this.enemys = this.physics.add.group();
 
-        //while(puntaje <= 100){
-        //    this.createEnemy()
-        //}
+        this.createEnemy();
 
-        //for (let i = 0; i < cantENEMIGOS; i++){
-            //this.createEnemy()
-        //}
+        // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
+        this.enemys.setVelocityX(-150);
 
-        this.createEnemy()
+        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
 
     }
 
-    disparar(){
-        this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
+    disparar() {
+        this.disparo.realizarDisparo(this.nave.x + 43, this.nave.y)
     }
 
     createEnemy() {
-
-        this.enemys = this.physics.add.group();
-        
-        
-        for (let i = 0; i < cantENEMIGOS; i++){
-            // Se crea una variable randomY que almacenará un valor entre 30 y 550
-           
-            this.enemys.create(0, 0, "enemy");
-
+        for (var i = 0; i < cantENEMIGOS; i++) {
+            this.enemys.create(0, 600, "enemy");
         }
-        // Se crea la nave enemiga
-        //this.enemy = this.physics.add.sprite(distanciaX + i * 100, randomY, "enemy").setImmovable();
-        // Se cancela la gravedad
-        //this.enemys.body.allowGravity = false;
-        // Se cancela el choque contra bordes
-        //this.enemy.setCollideWorldBounds(false);
-        // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
-        this.enemys.setVelocityX(-150);
-        // Detectamos cuando la nave enemiga sale de la pantalla
-        //this.enemy.checkWorldBounds = true;
-        // ... Y luego lo eliminamos
-        //this.enemy.outOfBoundsKill = true;
-        // Cada 2000 milisegundos llamaremos de nuevo a esta función para que genere un nuevo enemigo
-        //this.time.delayedCall(5000, this.enemy, [], this);
     };
 
-    reciclarEnemigos(){
-        const enemigosTemporales = [];
-        var distanciaX = 900;
-        //var randomY = Phaser.Math.Between(30,550);
+    destroyEnemy(disparo, enemys) {
+        this.aumentarPuntaje();
+        enemys.disableBody(true, true);
+        disparo.disableBody(true, true);
+    }
+
+    reciclarEnemigos() {
+        var distanciaX = 700;
         this.enemys.getChildren().forEach(
-            (enemy) => {
-                //enemigosTemporales.push(enemigo);
-                var randomY = Phaser.Math.Between(30,550);
-                enemy.x = distanciaX;
-                enemy.y = randomY;
+            (e) => {
+                if (e.getBounds().right < 0) {
+                    var randomY = Phaser.Math.Between(50, 550);
+                    var distanciaEntreNaves = Phaser.Math.Between(500, 900);
+                    e.x = distanciaX + distanciaEntreNaves;
+                    e.y = randomY;
+                }
             }
         )
     }
 
+    //Método que permite aumentar el puntaje
+    aumentarPuntaje() {
+        this.puntaje = this.puntaje + this.puntos;
+        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
+        console.log(this.puntaje);
+    }
+
     update(time) {
-        this.background.tilePositionX = time*0.1;
+        this.background.tilePositionX = time * 0.1;
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave.setVelocityY(-300);
@@ -156,15 +144,16 @@ class Escene extends Phaser.Scene {
         }
 
         this.reciclarEnemigos();
-
+        
+       
 
 
 
         this.inputKeys.forEach(key => {
-            if(Phaser.Input.Keyboard.JustDown(key)){
+            if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
             }
-            
+
         });
 
     }
