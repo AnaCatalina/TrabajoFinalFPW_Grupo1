@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import GrupoDisparos from "./GrupoDisparos";
 
-var cantENEMIGOS = 20;
+var cantENEMIGOS = 15;
 var score = 0;
 var scoreText;
 class Escene2 extends Phaser.Scene {
@@ -14,34 +14,42 @@ class Escene2 extends Phaser.Scene {
     puntaje = 0;
     vida = 100;
     puntos = 10;
-    sonido1 = null;
     disparo = null;
 
     preload() {
-        this.load.image("fondo", "imagen/juegoPhaser/background2.png");
-        this.load.spritesheet("nave2", "imagen/juegoPhaser/nave2.png", { frameWidth: 87, frameHeight: 91 });
+        this.load.image("fondo2", "imagen/juegoPhaser/background2.png");
+        this.load.spritesheet("nave2", "imagen/juegoPhaser/nave2.png", { frameWidth: 69, frameHeight: 62 });
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
+        this.load.image("enemy2", "imagen/juegoPhaser/enemy2.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
-        this.load.audio('nivel1', 'sonido/2022/2022Lv1.mp3');
+        this.load.audio('nivel2', 'sonido/2022/nivel2.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');
+        
     }
 
     create() {
         // Creando el fondo
-        this.background = this.add.tileSprite(400, 300, 800, 600, 'fondo').
+        this.background2 = this.add.tileSprite(400, 300, 800, 600, 'fondo2').
             setScrollFactor(0); // Esto nos permitira crear un fondo infinito
 
-        this.sonido1 = this.sound.add('nivel1');
+        this.sonido2 = this.sound.add('nivel2');
         const soundConfig = {
             loop: true,
-            volume: 0.2
+            volume: 0.6
         }
 
         this.sonidoShot = this.sound.add('sonidoDisparo'), {
             loop: false
         }
+        this.sonidoExplosion = this.sound.add('explosion'), {
+            loop: false
+        }
+        this.sonidoImpacto = this.sound.add('impacto'), {
+            loop: false
+        }
 
-        this.sonido1.play(soundConfig)
+        this.sonido2.play(soundConfig)
 
         this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0', {
             fontSize: '20px',
@@ -50,6 +58,11 @@ class Escene2 extends Phaser.Scene {
         });
 
         this.vidaEnTexto = this.add.text(10, 30, 'Vida: 100 %', {
+            fontSize: '20px',
+            fill: 'red',
+            fontFamily: 'arial'
+        });
+        this.nivel = this.add.text(725, 10, 'Nivel 2', {
             fontSize: '20px',
             fill: 'red',
             fontFamily: 'arial'
@@ -69,30 +82,35 @@ class Escene2 extends Phaser.Scene {
         this.physics.world.setBoundsCollision(true);
 
         this.anims.create({
-            key: 'sube',
+            key: 'sube2',
             frames: [{ key: 'nave2', frame: 2 }],
             frameRate: 20
         });
         this.anims.create({
-            key: 'normal',
+            key: 'normal2',
             frames: [{ key: 'nave2', frame: 0 }],
             frameRate: 20
         })
         this.anims.create({
-            key: 'baja',
+            key: 'baja2',
             frames: [{ key: 'nave2', frame: 1 }],
             frameRate: 20
         });
 
         this.enemys = this.physics.add.group();
+        this.enemys2 = this.physics.add.group();
 
         this.createEnemy();
+        this.createEnemy2();
 
         // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
         this.enemys.setVelocityX(-150);
+        this.enemys2.setVelocityX(-250);
 
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
+        this.physics.add.collider(this.disparo, this.enemys2, this.destroyEnemy, null, this);
         this.physics.add.collider(this.nave2, this.enemys, this.destroyJugador, null, this);
+        this.physics.add.collider(this.nave2, this.enemys2, this.destroyJugador, null, this);
 
     }
 
@@ -108,16 +126,37 @@ class Escene2 extends Phaser.Scene {
             this.enemys.create(0, 600, "enemy");
         }
     };
+    createEnemy2() {
+        for (var i = 0; i < cantENEMIGOS; i++) {
+            this.enemys2.create(0, 600, "enemy2");
+        }
+    };
 
     destroyEnemy(disparo, enemys) {
+        this.sonidoExplosion.play()
         this.aumentarPuntaje();
         enemys.disableBody(true, true);
         disparo.disableBody(true, true);
+        
+    }
+    destroyEnemy(disparo, enemys2) {
+        this.sonidoExplosion.play()
+        this.aumentarPuntaje();
+        enemys2.disableBody(true, true);
+        disparo.disableBody(true, true);
+        
     }
 
     destroyJugador(nave2, enemys) {
+        this.sonidoImpacto.play()
         this.disminuirVida();
         enemys.disableBody(true, true);
+    }
+
+    destroyJugador(nave2, enemys2) {
+        this.sonidoImpacto.play()
+        this.disminuirVida();
+        enemys2.disableBody(true, true);
     }
 
     reciclarEnemigos() {
@@ -132,6 +171,16 @@ class Escene2 extends Phaser.Scene {
                 }
             }
         )
+        this.enemys2.getChildren().forEach(
+            (e2) => {
+                if (e2.getBounds().right < 0) {
+                    var randomY2 = Phaser.Math.Between(50, 550);
+                    var distanciaEntreNaves2 = Phaser.Math.Between(50, 2000);
+                    e2.x = distanciaX + distanciaEntreNaves2;
+                    e2.y = randomY2;
+                }
+            }
+        )
     }
 
     //Método que permite aumentar el puntaje
@@ -143,42 +192,39 @@ class Escene2 extends Phaser.Scene {
 
     //Método que permite disminuír la vida
     disminuirVida() {
-        this.vida = this.vida - this.puntos * 3;
+        this.vida = this.vida - this.puntos * 2.5;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
         console.log(this.vida);
         if(this.vida <= 0){
-            this.nave2.body.destroy();
-            this.scene.pause();
-            this.sonido1.stop();
             this.mostrarGameover();
         }
     }
 
     
     felicitar(){
-        this.sonido1.stop();
+        this.sonido2.stop();
         this.puntaje=0;
         this.vida=100;
-        this.scene.start("WinLv1");     
+        this.scene.start("WinLv2");     
     }
 
     mostrarGameover() {
-        this.sonido1.stop();
+        this.sonido2.stop();
         this.puntaje=0;
         this.vida=100;
         this.scene.start('GameOver')
     }
 
     update(time) {
-        this.background.tilePositionX = time * 0.1;
+        this.background2.tilePositionX = time * 0.1;
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
             this.nave2.setVelocityY(-300);
-            this.nave2.anims.play('sube', true)
+            this.nave2.anims.play('sube2', true)
         }
         else if (this.cursors.down.isDown) {
             this.nave2.setVelocityY(300);
-            this.nave2.anims.play('baja', true)
+            this.nave2.anims.play('baja2', true)
         }
         else if (this.cursors.left.isDown) {
             this.nave2.setVelocityX(-300);
@@ -189,7 +235,7 @@ class Escene2 extends Phaser.Scene {
         else {
             this.nave2.setVelocityY(0);
             this.nave2.setVelocityX(0);
-            this.nave2.anims.play('normal')
+            this.nave2.anims.play('normal2')
         }
         
 
