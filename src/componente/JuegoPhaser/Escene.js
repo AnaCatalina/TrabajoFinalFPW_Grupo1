@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Disparo from "./Disparo";
 import GrupoDisparos from "./GrupoDisparos";
 
-var cantENEMIGOS = 15;
+var cantENEMIGOS = 20;
 var score = 0;
 var scoreText;
 class Escene extends Phaser.Scene {
@@ -13,6 +13,7 @@ class Escene extends Phaser.Scene {
     // Se emplean variables globales
     cursors = null;
     puntaje = 0;
+    vida = 100;
     puntos = 10;
     sonido1 = null;
     disparo = null;
@@ -44,6 +45,12 @@ class Escene extends Phaser.Scene {
         this.sonido1.play(soundConfig)
 
         this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0', {
+            fontSize: '20px',
+            fill: 'red',
+            fontFamily: 'arial'
+        });
+
+        this.vidaEnTexto = this.add.text(10, 30, 'Vida: 100 %', {
             fontSize: '20px',
             fill: 'red',
             fontFamily: 'arial'
@@ -86,6 +93,7 @@ class Escene extends Phaser.Scene {
         this.enemys.setVelocityX(-150);
 
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
+        this.physics.add.collider(this.nave, this.enemys, this.destroyJugador, null, this);
 
     }
 
@@ -108,13 +116,18 @@ class Escene extends Phaser.Scene {
         disparo.disableBody(true, true);
     }
 
+    destroyJugador(nave, enemys) {
+        this.disminuirVida();
+        enemys.disableBody(true, true);
+    }
+
     reciclarEnemigos() {
         var distanciaX = 700;
         this.enemys.getChildren().forEach(
             (e) => {
                 if (e.getBounds().right < 0) {
                     var randomY = Phaser.Math.Between(50, 550);
-                    var distanciaEntreNaves = Phaser.Math.Between(500, 900);
+                    var distanciaEntreNaves = Phaser.Math.Between(50, 2000);
                     e.x = distanciaX + distanciaEntreNaves;
                     e.y = randomY;
                 }
@@ -127,6 +140,19 @@ class Escene extends Phaser.Scene {
         this.puntaje = this.puntaje + this.puntos;
         this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
         console.log(this.puntaje);
+    }
+
+    //Método que permite disminuír la vida
+    disminuirVida() {
+        this.vida = this.vida - this.puntos * 3;
+        this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
+        console.log(this.vida);
+        if(this.vida <= 0){
+            this.nave.body.destroy();
+            this.scene.pause();
+            this.sonido1.stop();
+            //this.mostrarGameover();
+        }
     }
 
     
