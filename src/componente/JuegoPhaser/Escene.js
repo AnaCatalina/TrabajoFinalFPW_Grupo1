@@ -22,7 +22,8 @@ class Escene extends Phaser.Scene {
         this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", { frameWidth: 69, frameHeight: 62 });
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
-        this.load.audio('nivel1', 'sonido/level1.mp3');
+        this.load.audio('nivel1', 'sonido/2022/2022Lv1.mp3');
+        this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
     }
 
     create() {
@@ -32,7 +33,12 @@ class Escene extends Phaser.Scene {
 
         this.sonido1 = this.sound.add('nivel1');
         const soundConfig = {
-            loop: true
+            loop: true,
+            volume: 0.2
+        }
+
+        this.sonidoShot = this.sound.add('sonidoDisparo'), {
+            loop: false
         }
 
         this.sonido1.play(soundConfig)
@@ -83,8 +89,11 @@ class Escene extends Phaser.Scene {
 
     }
 
-    disparar() {
-        this.disparo.realizarDisparo(this.nave.x + 43, this.nave.y)
+
+
+    disparar(){
+        this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
+        this.sonidoShot.play()
     }
 
     createEnemy() {
@@ -120,6 +129,13 @@ class Escene extends Phaser.Scene {
         console.log(this.puntaje);
     }
 
+    
+    felicitar(){
+        this.sonido1.stop();
+        this.puntaje=0;
+        this.scene.start("WinLv1");     
+    }
+
     update(time) {
         this.background.tilePositionX = time * 0.1;
         //Movimiento de la nave
@@ -142,6 +158,7 @@ class Escene extends Phaser.Scene {
             this.nave.setVelocityX(0);
             this.nave.anims.play('normal')
         }
+        
 
         this.reciclarEnemigos();
         
@@ -152,9 +169,15 @@ class Escene extends Phaser.Scene {
         this.inputKeys.forEach(key => {
             if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
+                //this.felicitar();
             }
 
         });
+
+
+        if(this.puntaje == 150){
+            this.felicitar();
+        }
 
     }
 }

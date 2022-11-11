@@ -2,9 +2,9 @@ import Phaser from "phaser";
 import GrupoDisparos from "./GrupoDisparos";
 
 const cantENEMIGOS = 10;
-class Escene extends Phaser.Scene {
+class Escene2 extends Phaser.Scene {
     constructor() {
-        super({ key: 'Inicio' });
+        super({ key: 'Escene2' });
     }
 
     //Se emplean variables globales
@@ -82,7 +82,7 @@ class Escene extends Phaser.Scene {
         //for (let i = 0; i < cantENEMIGOS; i++){
             //this.createEnemy()
         //}
-
+    }
     update(time) {
         this.background.tilePositionX = time*0.1;
         //Movimiento de la nave
@@ -121,4 +121,4 @@ class Escene extends Phaser.Scene {
     }
 }
 
-export default Escene;
+export default Escene2;

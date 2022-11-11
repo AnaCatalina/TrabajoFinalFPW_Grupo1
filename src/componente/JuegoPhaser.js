@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
-//import Win from "./JuegoArknoid/Win";
+import WinLv1 from './JuegoPhaser/Menu2022/WinLv1';
 //import Gameover from "./JuegoArknoid/GameOver";
 
 function Juego(){
@@ -29,7 +29,7 @@ useEffect(() => {
                 gravity: { x: 0 }
             }
         },
-        scene: [Escene/*, Gameover, Win*/ ]    
+        scene: [Escene/*, Gameover*/, WinLv1 ]    
     };
    
     var game = new Phaser.Game(config);
