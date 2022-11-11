@@ -1,11 +1,12 @@
 import Escene from "./JuegoPhaser/Escene";
+import Escene2 from "./JuegoPhaser/Escene2";
 import sonido1 from '../sounds/sonido1.mp3';
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
 import WinLv1 from './JuegoPhaser/Menu2022/WinLv1';
-//import Gameover from "./JuegoArknoid/GameOver";
+import Gameover from "./JuegoPhaser/Menu2022/GameOver";
 
 function Juego(){
     
@@ -29,7 +30,7 @@ useEffect(() => {
                 gravity: { x: 0 }
             }
         },
-        scene: [Escene/*, Gameover*/, WinLv1 ]    
+        scene: [Escene, Gameover, WinLv1,Escene2 ]    
     };
    
     var game = new Phaser.Game(config);

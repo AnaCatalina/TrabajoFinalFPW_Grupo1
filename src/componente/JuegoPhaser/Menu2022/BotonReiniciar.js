@@ -31,13 +31,13 @@ export class BotonReset{
             this.escenaR.scene.start('Inicio')
 
         });
-        this.botonReset.on('pointerdown', () => {
+        this.botonNext.on('pointerdown', () => {
             this.escenaR.scene.start('Escene2')
 
         });
 
     }
-    crear2(){
+    /*crear2(){
         this.botoninicio = this.escenaR.add.sprite(400,500,'boton').setInteractive();
 
         this.botoninicio.on('pointerover', () => {
@@ -53,7 +53,7 @@ export class BotonReset{
 
         });
 
-    }
+    }*/
 
 
 }

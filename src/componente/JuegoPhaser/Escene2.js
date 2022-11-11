@@ -1,13 +1,12 @@
 import Phaser from "phaser";
-import Disparo from "./Disparo";
 import GrupoDisparos from "./GrupoDisparos";
 
 var cantENEMIGOS = 20;
 var score = 0;
 var scoreText;
-class Escene extends Phaser.Scene {
+class Escene2 extends Phaser.Scene {
     constructor() {
-        super({ key: 'Inicio' });
+        super({ key: 'Escene2' });
     }
 
     // Se emplean variables globales
@@ -19,8 +18,8 @@ class Escene extends Phaser.Scene {
     disparo = null;
 
     preload() {
-        this.load.image("fondo", "imagen/juegoPhaser/background.png");
-        this.load.spritesheet("nave", "imagen/juegoPhaser/nave.png", { frameWidth: 69, frameHeight: 62 });
+        this.load.image("fondo", "imagen/juegoPhaser/background2.png");
+        this.load.spritesheet("nave2", "imagen/juegoPhaser/nave2.png", { frameWidth: 87, frameHeight: 91 });
         this.load.image("enemy", "imagen/juegoPhaser/enemy.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
         this.load.audio('nivel1', 'sonido/2022/2022Lv1.mp3');
@@ -61,27 +60,27 @@ class Escene extends Phaser.Scene {
 
         this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
         // Se crea la nave
-        this.nave = this.physics.add.sprite(150, 300, "nave").setImmovable();
+        this.nave2 = this.physics.add.sprite(150, 300, "nave2").setImmovable();
         // Se cancela la gravedad
-        this.nave.body.allowGravity = false;
-        this.nave.setCollideWorldBounds(true);
+        this.nave2.body.allowGravity = false;
+        this.nave2.setCollideWorldBounds(true);
         // Se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setBoundsCollision(true);
 
         this.anims.create({
             key: 'sube',
-            frames: [{ key: 'nave', frame: 2 }],
+            frames: [{ key: 'nave2', frame: 2 }],
             frameRate: 20
         });
         this.anims.create({
             key: 'normal',
-            frames: [{ key: 'nave', frame: 0 }],
+            frames: [{ key: 'nave2', frame: 0 }],
             frameRate: 20
         })
         this.anims.create({
             key: 'baja',
-            frames: [{ key: 'nave', frame: 1 }],
+            frames: [{ key: 'nave2', frame: 1 }],
             frameRate: 20
         });
 
@@ -93,14 +92,14 @@ class Escene extends Phaser.Scene {
         this.enemys.setVelocityX(-150);
 
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
-        this.physics.add.collider(this.nave, this.enemys, this.destroyJugador, null, this);
+        this.physics.add.collider(this.nave2, this.enemys, this.destroyJugador, null, this);
 
     }
 
 
 
     disparar(){
-        this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
+        this.disparo.realizarDisparo(this.nave2.x+43 , this.nave2.y)
         this.sonidoShot.play()
     }
 
@@ -116,7 +115,7 @@ class Escene extends Phaser.Scene {
         disparo.disableBody(true, true);
     }
 
-    destroyJugador(nave, enemys) {
+    destroyJugador(nave2, enemys) {
         this.disminuirVida();
         enemys.disableBody(true, true);
     }
@@ -148,8 +147,8 @@ class Escene extends Phaser.Scene {
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
         console.log(this.vida);
         if(this.vida <= 0){
-            this.nave.body.destroy();
-            //this.scene.pause();
+            this.nave2.body.destroy();
+            this.scene.pause();
             this.sonido1.stop();
             this.mostrarGameover();
         }
@@ -174,23 +173,23 @@ class Escene extends Phaser.Scene {
         this.background.tilePositionX = time * 0.1;
         //Movimiento de la nave
         if (this.cursors.up.isDown) {
-            this.nave.setVelocityY(-300);
-            this.nave.anims.play('sube', true)
+            this.nave2.setVelocityY(-300);
+            this.nave2.anims.play('sube', true)
         }
         else if (this.cursors.down.isDown) {
-            this.nave.setVelocityY(300);
-            this.nave.anims.play('baja', true)
+            this.nave2.setVelocityY(300);
+            this.nave2.anims.play('baja', true)
         }
         else if (this.cursors.left.isDown) {
-            this.nave.setVelocityX(-300);
+            this.nave2.setVelocityX(-300);
         }
         else if (this.cursors.right.isDown) {
-            this.nave.setVelocityX(300);
+            this.nave2.setVelocityX(300);
         }
         else {
-            this.nave.setVelocityY(0);
-            this.nave.setVelocityX(0);
-            this.nave.anims.play('normal')
+            this.nave2.setVelocityY(0);
+            this.nave2.setVelocityX(0);
+            this.nave2.anims.play('normal')
         }
         
 
@@ -216,4 +215,4 @@ class Escene extends Phaser.Scene {
     }
 }
 
-export default Escene;
+export default Escene2;
