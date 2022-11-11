@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import "../style/Cuadrado.css";
+import "../Ta-Te-ti/style/Cuadrado.css";
 
 
 const Cuadrado = ({value, onClick, turno,gano})=>{

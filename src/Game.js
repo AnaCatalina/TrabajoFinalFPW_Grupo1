@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Form} from 'react-router-dom';
 import Home from './componente/Home';
 import MenuArknoid from './componente/MenuArknoid';
 import ArknoidLv1 from "./componente/ArknoidLv1";
@@ -6,8 +6,9 @@ import ArknoidLv2 from './componente/ArknoidLv2';
 import Desarrolladores from './componente/Desarrolladores';
 import Ahorcadito from './componente/Ahorcadito';
 import PiedraPapelTijera from './componente/PiedraPapelTijera';
-import JuegoMemoria from './componente/JuegoMemoria';
-import JuegoPhaser from './componente/JuegoPhaser'
+//import JuegoMemoria from './componente/JuegoMemoria';
+import JuegoPhaser from './componente/JuegoPhaser';
+import TaTeTi from './componente/Ta-Te-Ti';
 
 
 function Game() {
@@ -22,7 +23,7 @@ function Game() {
         <Route path='/MenuAknoid' element={<MenuArknoid/>}/>        
         <Route path='/Aknoid1' element={<ArknoidLv1/>}/>
         <Route path='/Aknoid2' element={<ArknoidLv2/>}/>
-        <Route path='JuegoMemoria' element={<JuegoMemoria/>}/>
+        <Route path='Ta-Te-Ti' element={<TaTeTi/>}/>
         <Route path='/JuegoPhaser' element={<JuegoPhaser/>}/>
       </Routes>
     </Router>
