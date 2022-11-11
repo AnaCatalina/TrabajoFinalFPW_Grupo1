@@ -3,6 +3,13 @@ import Tablero from "../componente/Ta-Te-ti/Tablero";
 import '../componente/Ta-Te-ti/style/Game.css';
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import sonido1 from '../sounds/sonido1.mp3';
+
+
+    
+  function play(){
+      new Audio(sonido1).play();
+  }
 
 const combinacionGanadora = [
   [0, 1, 2],
@@ -73,7 +80,7 @@ const combinacionGanadora = [
           
           <Tablero lineaGanadora={lineaGanadora} turno = {turno} cuadrados={cuadrados} onClick = {clikear}/>
           <Button variant="warning" >
-        <Link to='/' className="btn btn-principal">Volver</Link>
+        <Link to='/' className="btn btn-principal" onClick={play}>Volver</Link>
              </Button>
         </div>
       
