@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import GrupoDisparos from "./GrupoDisparos";
 
 var cantENEMIGOS = 15;
 var score = 0;
@@ -27,8 +26,7 @@ class Escene3 extends Phaser.Scene {
         this.load.image("disparoJefe", "imagen/juegoPhaser/shootBoss.png");
         this.load.audio('nivel3', 'sonido/2022/nivel3.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
-        this.load.audio('explosion', 'sonido/2022/explosion.mp3');
-        
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');        
     }
 
     create() {
@@ -71,20 +69,17 @@ class Escene3 extends Phaser.Scene {
             fontFamily: 'arial'
         });
 
-        // Se crea el disparo
-        this.disparo = new GrupoDisparos(this);
-
         this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
         // Se crea la nave
-        this.nave3 = this.physics.add.sprite(150, 300, "nave3").setImmovable();
-
-        
-
-        this.jefe = this.physics.add.sprite(700, 300, "boss").setImmovable();
-        this.disparoDeJefe = this.physics.add.sprite(-100,-100,'disparoJefe')
+        this.nave3 = this.physics.add.sprite(150, 300, "nave3").setImmovable(); 
         // Se cancela la gravedad
         this.nave3.body.allowGravity = false;
-        this.nave3.setCollideWorldBounds(true);
+        this.nave3.setCollideWorldBounds(true);    
+        this.jefe = this.physics.add.sprite(700, 300, "boss").setImmovable();
+        //Se crea un disparo de Jefe fuera del juego
+        this.disparoDeJefe = this.physics.add.sprite(-100,-100,'disparoJefe')        
+        //Se crea un disparo fuera del juego
+        this.disparo = this.physics.add.sprite(0 , 900,'disparo').setImmovable();
         // Se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setBoundsCollision(true);
@@ -107,7 +102,6 @@ class Escene3 extends Phaser.Scene {
 
         this.physics.add.collider(this.disparo, this.jefe, this.damageBoss, null, this);
         
-
     }
 
     moverJefe(){
@@ -123,12 +117,12 @@ class Escene3 extends Phaser.Scene {
         this.disparoDeJefe = this.physics.add.sprite(this.jefe.x,this.jefe.y,'disparoJefe').setImmovable();        
         this.disparoDeJefe.setVelocityX(Phaser.Math.Between((-300),(-500)));
         this.disparoDeJefe.setVelocityY((Phaser.Math.Between((-1),(1)))*30);
-        cooldown = true;
-        
+        cooldown = true;        
     }
 
     disparar(){
-        this.disparo.realizarDisparo(this.nave3.x+43 , this.nave3.y);
+        this.disparo = this.physics.add.sprite(this.nave3.x+43 , this.nave3.y,'disparo');
+        this.disparo.setVelocityX(500);
         this.sonidoShot.play()
     }
 
@@ -149,10 +143,6 @@ class Escene3 extends Phaser.Scene {
     destroyJugador(nave3, disparoDeJefe) {
         this.sonidoImpacto.play()
         this.disminuirVida();
-        
-        
-        
-        
         disparoDeJefe.disableBody(true);
         disparoDeJefe.setVisible(false)
         cooldown=false;
@@ -221,21 +211,29 @@ class Escene3 extends Phaser.Scene {
 
         });
 
-        
-        //this.jefe.setVelocityY(velBossY);
         this.physics.add.collider(this.nave3, this.disparoDeJefe, this.destroyJugador, null, this);
         this.moverJefe();
         
         if(cooldown==false){
             this.dispararJefe();
         }
+        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
         if((this.disparoDeJefe.x<400)||(this.disparoDeJefe.x<200)){
             cooldown = false;
-        }
+        }        
         /*if(this.puntaje == 150){
             this.felicitar();
         }*/
-
+        if(this.disparo.x>800){
+            this.disparo.disableBody(true);
+            this.disparo.setActive(false);
+            this.disparo.setVisible(false);
+        }
+        if(this.disparoDeJefe.x<0){
+            this.disparoDeJefe.disableBody(true);
+            this.disparoDeJefe.setActive(false);
+            this.disparoDeJefe.setVisible(false);
+        }
     }
 }
 

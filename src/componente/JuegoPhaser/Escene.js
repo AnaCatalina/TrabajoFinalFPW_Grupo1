@@ -1,6 +1,4 @@
 import Phaser from "phaser";
-import Disparo from "./Disparo";
-import GrupoDisparos from "./GrupoDisparos";
 
 var cantENEMIGOS = 20;
 var score = 0;
@@ -69,15 +67,14 @@ class Escene extends Phaser.Scene {
             fontFamily: 'arial'
         });
 
-        // Se crea el disparo
-        this.disparo = new GrupoDisparos(this);
-
         this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
         // Se crea la nave
         this.nave = this.physics.add.sprite(150, 300, "nave").setImmovable();
         // Se cancela la gravedad
         this.nave.body.allowGravity = false;
-        this.nave.setCollideWorldBounds(true);
+        this.nave.setCollideWorldBounds(true);        
+        //Se crea un disparo fuera del juego
+        this.disparo = this.physics.add.sprite(0 , 900,'disparo').setImmovable();
         // Se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setBoundsCollision(true);
@@ -104,18 +101,17 @@ class Escene extends Phaser.Scene {
 
         // Disminuímos la velocidad en x (hará que la nave enemiga se mueva hacia la izquierda)
         this.enemys.setVelocityX(-150);
-
-        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
+        
         this.physics.add.collider(this.nave, this.enemys, this.destroyJugador, null, this);
 
     }
 
-
-
     disparar(){
-        this.disparo.realizarDisparo(this.nave.x+43 , this.nave.y)
-        this.sonidoShot.play()
+        this.disparo = this.physics.add.sprite(this.nave.x+43 , this.nave.y,'disparo');
+        this.disparo.setVelocityX(500);
+        this.sonidoShot.play()        
     }
+
 
     createEnemy() {
         for (var i = 0; i < cantENEMIGOS; i++) {
@@ -127,9 +123,10 @@ class Escene extends Phaser.Scene {
         this.sonidoExplosion.play()
         this.aumentarPuntaje();
         enemys.disableBody(true, true);
-        this.disparo.setActive(false);
-        //this.disparo.setVisible(false);
-        disparo.disableBody(true, true);
+        disparo.disableBody(true);
+        disparo.setActive(false);
+        disparo.setVisible(false);
+        
     }
 
     destroyJugador(nave, enemys) {
@@ -171,7 +168,6 @@ class Escene extends Phaser.Scene {
             this.mostrarGameover();
         }
     }
-
     
     felicitar(){
         this.sonido1.stop();
@@ -215,19 +211,23 @@ class Escene extends Phaser.Scene {
         
        
 
-
+        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
 
         this.inputKeys.forEach(key => {
             if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
-                //this.felicitar();
             }
 
         });
-
+        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
 
         if(this.puntaje == 150){
             this.felicitar();
+        }
+        if(this.disparo.x>800){
+            this.disparo.disableBody(true);
+            this.disparo.setActive(false);
+            this.disparo.setVisible(false);
         }
 
     }

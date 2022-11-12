@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import GrupoDisparos from "./GrupoDisparos";
 
 var cantENEMIGOS = 15;
 var score = 0;
@@ -24,8 +23,7 @@ class Escene2 extends Phaser.Scene {
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
         this.load.audio('nivel2', 'sonido/2022/nivel2.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
-        this.load.audio('explosion', 'sonido/2022/explosion.mp3');
-        
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');        
     }
 
     create() {
@@ -68,15 +66,14 @@ class Escene2 extends Phaser.Scene {
             fontFamily: 'arial'
         });
 
-        // Se crea el disparo
-        this.disparo = new GrupoDisparos(this);
-
         this.inputKeys = [this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)]
         // Se crea la nave
         this.nave2 = this.physics.add.sprite(150, 300, "nave2").setImmovable();
         // Se cancela la gravedad
         this.nave2.body.allowGravity = false;
         this.nave2.setCollideWorldBounds(true);
+        //Se crea un disparo fuera del juego
+        this.disparo = this.physics.add.sprite(0 , 900,'disparo').setImmovable();
         // Se agrega un objeto para mover la plataforma
         this.cursors = this.input.keyboard.createCursorKeys();
         this.physics.world.setBoundsCollision(true);
@@ -107,18 +104,14 @@ class Escene2 extends Phaser.Scene {
         this.enemys.setVelocityX(-150);
         this.enemys2.setVelocityX(-250);
 
-        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
-        this.physics.add.collider(this.disparo, this.enemys2, this.destroyEnemy, null, this);
         this.physics.add.collider(this.nave2, this.enemys, this.destroyJugador, null, this);
         this.physics.add.collider(this.nave2, this.enemys2, this.destroyJugador, null, this);
-
     }
 
-
-
     disparar(){
-        this.disparo.realizarDisparo(this.nave2.x+43 , this.nave2.y)
-        this.sonidoShot.play()
+        this.disparo = this.physics.add.sprite(this.nave2.x+43 , this.nave2.y,'disparo');
+        this.disparo.setVelocityX(500);
+        this.sonidoShot.play()        
     }
 
     createEnemy() {
@@ -237,27 +230,24 @@ class Escene2 extends Phaser.Scene {
             this.nave2.setVelocityX(0);
             this.nave2.anims.play('normal2')
         }
-        
-
-        this.reciclarEnemigos();
-        
-       
-
-
-
+        this.reciclarEnemigos();        
         this.inputKeys.forEach(key => {
             if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
                 //this.felicitar();
             }
-
         });
 
-
+        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
+        this.physics.add.collider(this.disparo, this.enemys2, this.destroyEnemy, null, this);
         if(this.puntaje == 150){
             this.felicitar();
         }
-
+        if(this.disparo.x>800){
+            this.disparo.disableBody(true);
+            this.disparo.setActive(false);
+            this.disparo.setVisible(false);
+        }
     }
 }
 
