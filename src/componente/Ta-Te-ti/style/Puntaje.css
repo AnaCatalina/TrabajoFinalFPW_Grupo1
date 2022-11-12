@@ -3,6 +3,7 @@
         display: grid;
         grid-auto-flow: column;
         margin-top: 20px;
+        padding-bottom: 50px;
 
 }
 .puntaje-tablero div{
@@ -12,6 +13,7 @@
     padding: 5px;
     font-weight: bold;
     background-color: darkcyan;
+    text-shadow: 2px 2px 2px violet;
 
 }
 .puntaje-tablero div:first-child{
