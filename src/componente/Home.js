@@ -23,7 +23,7 @@ export default function Home(){
                     <Link to='/ahorcadito' className="btn btn-principal" onClick={play}>Jugar Ahorcadito</Link>
                 </Button>
                 <Button variant="outline-success" size="lg" >
-                    <Link to='/MenuAknoid' className="btn btn-principal" onClick={play}>Jugar Arknoid</Link>
+                    <Link to='/MenuArkanoid' className="btn btn-principal" onClick={play}>Jugar Arkanoid</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
                     <Link to='/JuegoMemoria' className="btn btn-principal" onClick={play}>Jugar Juego Memoria</Link>

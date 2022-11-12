@@ -2,6 +2,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import React from "react";
 
+
 export default function DevsMain(props) {
     return (
         <Card style={{ width: '25rem' }} border="danger" className='cardDev'>
@@ -14,7 +15,6 @@ export default function DevsMain(props) {
                         <ListGroup.Item> Link de GitHub: {props.linkGit}</ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
-
         </Card>
     );
 }

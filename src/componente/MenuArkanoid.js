@@ -16,10 +16,10 @@ export default function MenuArknoid() {
 
             <div className="d-grid gap-2 col-6 mx-auto " >
                 <Button variant="outline-success" size="lg" >
-                    <Link to='/Aknoid1' className="btn btn-principal" onClick={play}>Jugar Nivel 1</Link>
+                    <Link to='/Arkanoid1' className="btn btn-principal" onClick={play}>Jugar Nivel 1</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
-                    <Link to='/Aknoid2' className="btn btn-principal" onClick={play}>Jugar Nivel 2</Link>
+                    <Link to='/Arkanoid2' className="btn btn-principal" onClick={play}>Jugar Nivel 2</Link>
                 </Button>
 
             </div>

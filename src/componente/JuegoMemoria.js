@@ -1,7 +1,7 @@
 
-import PantallaInicial from './JuegoDeMemoria/PantallaInicial';
-import Juego from './JuegoDeMemoria/Juego';
-import Win from './JuegoDeMemoria/Win';
+import PantallaInicial from './juegoDeMemoria/PantallaInicial';
+import Juego from './juegoDeMemoria/Juego';
+import Win from './juegoDeMemoria/Win';
 import { useState } from 'react';
 
 

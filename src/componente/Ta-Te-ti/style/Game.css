@@ -3,8 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     transition: all .2s ;
     border-radius: 0%;
+    background-image: url(https://a-static.besthdwallpaper.com/puesta-de-sol-de-neon-abstracto-papel-pintado-2560x1600-80571_7.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    background-repeat: no-repeat;
     clip-path: polygon(36% 0, 0 0, 0 29%, 0 57%, 0 100%, 30% 100%, 73% 100%, 100% 100%, 100% 59%, 100% 31%, 100% 0, 74% 0);
 }
