@@ -14,6 +14,7 @@ class Escene3 extends Phaser.Scene {
     cursors = null;
     puntaje = 0;
     vida = 100;
+    vidaJefe = 100;
     puntos = 10;
     disparo = null;
     
@@ -26,7 +27,8 @@ class Escene3 extends Phaser.Scene {
         this.load.image("disparoJefe", "imagen/juegoPhaser/shootBoss.png");
         this.load.audio('nivel3', 'sonido/2022/nivel3.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
-        this.load.audio('explosion', 'sonido/2022/explosion.mp3');        
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');    
+        this.load.audio('impacto', 'sonido/2022/impact.mp3');    
     }
 
     create() {
@@ -63,6 +65,13 @@ class Escene3 extends Phaser.Scene {
             fill: 'red',
             fontFamily: 'arial'
         });
+
+        this.vidaJefeEnTexto = this.add.text(650, 30, 'Boss: 100 %', {
+            fontSize: '20px',
+            fill: 'red',
+            fontFamily: 'arial'
+        });
+
         this.nivel = this.add.text(725, 10, 'Nivel 3', {
             fontSize: '20px',
             fill: 'red',
@@ -99,9 +108,6 @@ class Escene3 extends Phaser.Scene {
             frames: [{ key: 'nave3', frame: 1 }],
             frameRate: 20
         });
-
-        this.physics.add.collider(this.disparo, this.jefe, this.damageBoss, null, this);
-        
     }
 
     moverJefe(){
@@ -126,20 +132,6 @@ class Escene3 extends Phaser.Scene {
         this.sonidoShot.play()
     }
 
-    damageBoss(disparo, jefe) {
-        this.sonidoExplosion.play()
-        this.aumentarPuntaje();
-        disparo.setActive(false);
-        jefe.setVisible(false);
-        
-        //this.quitarVidaJefe();
-        /*if(vidaJefe==0){
-            jefe.disableBody(true, true);
-        }*/
-        
-        //disparo.disableBody(true, true);        
-    }
-
     destroyJugador(nave3, disparoDeJefe) {
         this.sonidoImpacto.play()
         this.disminuirVida();
@@ -148,35 +140,54 @@ class Escene3 extends Phaser.Scene {
         cooldown=false;
     }
 
+    destroyJefe(jefe, disparo) {
+        this.sonidoExplosion.play()
+        this.aumentarPuntaje();
+        disparo.disableBody(true);
+        disparo.setActive(false);
+        disparo.setVisible(false);
+        cooldown=false;
+    }
+
     //Método que permite aumentar el puntaje
     aumentarPuntaje() {
         this.puntaje = this.puntaje + this.puntos;
         this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
-        console.log(this.puntaje);
+        //console.log(this.puntaje);
     }
 
     //Método que permite disminuír la vida
     disminuirVida() {
         this.vida = this.vida - 25;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
-        console.log(this.vida);
+        //console.log(this.vida);
         if(this.vida <= 0){
-            //this.mostrarGameover();
+            this.mostrarGameover();
         }
     }
 
+    disminuirVidaJefe() {
+        this.vidaJefe = this.vidaJefe - 2;
+        this.vidaJefeEnTexto.setText('Boss: ' + this.vidaJefe + ' %');
+        //console.log(this.vida);
+        if(this.vidaJefe <= 0){
+            this.felicitar();
+        }
+    }
     
     felicitar(){
-        this.sonido2.stop();
+        this.sonido3.stop();
         this.puntaje=0;
         this.vida=100;
+        this.vidaJefe=100;
         this.scene.start("WinLv1");     
     }
 
     mostrarGameover() {
-        this.sonido2.stop();
+        this.sonido3.stop();
         this.puntaje=0;
         this.vida=100;
+        this.vidaJefe=100;
         this.scene.start('GameOver')
     }
 
@@ -206,12 +217,12 @@ class Escene3 extends Phaser.Scene {
         this.inputKeys.forEach(key => {
             if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
-                //this.felicitar();
             }
 
         });
 
         this.physics.add.collider(this.nave3, this.disparoDeJefe, this.destroyJugador, null, this);
+        this.physics.add.collider(this.disparo, this.jefe, this.disminuirVidaJefe, null, this);
         this.moverJefe();
         
         if(cooldown==false){
@@ -220,10 +231,7 @@ class Escene3 extends Phaser.Scene {
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
         if((this.disparoDeJefe.x<400)||(this.disparoDeJefe.x<200)){
             cooldown = false;
-        }        
-        /*if(this.puntaje == 150){
-            this.felicitar();
-        }*/
+        }
         if(this.disparo.x>800){
             this.disparo.disableBody(true);
             this.disparo.setActive(false);

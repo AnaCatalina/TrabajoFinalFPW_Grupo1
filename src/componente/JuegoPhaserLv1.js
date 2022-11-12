@@ -49,7 +49,7 @@ useEffect(() => {
 },[listo]);
     return(
         <Button variant="warning" >
-        <Link to='/' className="btn btn-principal"  onClick={play}>Volver</Link>
+        <Link to='/MenuJuegoPhaser' className="btn btn-principal"  onClick={play}>Volver</Link>
     </Button>
     )
 

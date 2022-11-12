@@ -50,7 +50,7 @@ class Escene extends Phaser.Scene {
 
         this.sonido1.play(soundConfig)
 
-        this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0', {
+        this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0 / 150', {
             fontSize: '20px',
             fill: 'red',
             fontFamily: 'arial'
@@ -152,7 +152,7 @@ class Escene extends Phaser.Scene {
     //Método que permite aumentar el puntaje
     aumentarPuntaje() {
         this.puntaje = this.puntaje + this.puntos;
-        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
+        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje + ' / 150');
         console.log(this.puntaje);
     }
 
@@ -160,7 +160,7 @@ class Escene extends Phaser.Scene {
     disminuirVida() {
         this.vida = this.vida - this.puntos * 2.5;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
-        console.log(this.vida);
+        //console.log(this.vida);
         if(this.vida <= 0){
             this.nave.body.destroy();
             //this.scene.pause();
@@ -206,10 +206,7 @@ class Escene extends Phaser.Scene {
             this.nave.anims.play('normal')
         }
         
-
         this.reciclarEnemigos();
-        
-       
 
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
 
@@ -219,11 +216,11 @@ class Escene extends Phaser.Scene {
             }
 
         });
-        this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
 
         if(this.puntaje == 150){
             this.felicitar();
         }
+        
         if(this.disparo.x>800){
             this.disparo.disableBody(true);
             this.disparo.setActive(false);

@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-var cantENEMIGOS = 15;
+var cantENEMIGOS = 20;
 var score = 0;
 var scoreText;
 class Escene2 extends Phaser.Scene {
@@ -23,7 +23,8 @@ class Escene2 extends Phaser.Scene {
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
         this.load.audio('nivel2', 'sonido/2022/nivel2.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
-        this.load.audio('explosion', 'sonido/2022/explosion.mp3');        
+        this.load.audio('explosion', 'sonido/2022/explosion.mp3');      
+        this.load.audio('impacto', 'sonido/2022/impact.mp3');  
     }
 
     create() {
@@ -49,7 +50,7 @@ class Escene2 extends Phaser.Scene {
 
         this.sonido2.play(soundConfig)
 
-        this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0', {
+        this.puntajeEnTexto = this.add.text(10, 10, 'Puntos: 0 / 300', {
             fontSize: '20px',
             fill: 'red',
             fontFamily: 'arial'
@@ -132,7 +133,7 @@ class Escene2 extends Phaser.Scene {
         disparo.disableBody(true, true);
         
     }
-    destroyEnemy(disparo, enemys2) {
+    destroyEnemy2(disparo, enemys2) {
         this.sonidoExplosion.play()
         this.aumentarPuntaje();
         enemys2.disableBody(true, true);
@@ -179,15 +180,15 @@ class Escene2 extends Phaser.Scene {
     //Método que permite aumentar el puntaje
     aumentarPuntaje() {
         this.puntaje = this.puntaje + this.puntos;
-        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje);
-        console.log(this.puntaje);
+        this.puntajeEnTexto.setText('Puntos: ' + this.puntaje + ' / 300');
+        //console.log(this.puntaje);
     }
 
     //Método que permite disminuír la vida
     disminuirVida() {
         this.vida = this.vida - this.puntos * 2.5;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
-        console.log(this.vida);
+        //console.log(this.vida);
         if(this.vida <= 0){
             this.mostrarGameover();
         }
@@ -230,17 +231,18 @@ class Escene2 extends Phaser.Scene {
             this.nave2.setVelocityX(0);
             this.nave2.anims.play('normal2')
         }
-        this.reciclarEnemigos();        
+
+        this.reciclarEnemigos();
+        
         this.inputKeys.forEach(key => {
             if (Phaser.Input.Keyboard.JustDown(key)) {
                 this.disparar();
-                //this.felicitar();
             }
         });
 
         this.physics.add.collider(this.disparo, this.enemys, this.destroyEnemy, null, this);
-        this.physics.add.collider(this.disparo, this.enemys2, this.destroyEnemy, null, this);
-        if(this.puntaje == 150){
+        this.physics.add.collider(this.disparo, this.enemys2, this.destroyEnemy2, null, this);
+        if(this.puntaje == 300){
             this.felicitar();
         }
         if(this.disparo.x>800){

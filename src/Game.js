@@ -7,8 +7,11 @@ import Desarrolladores from './componente/Desarrolladores';
 import Ahorcadito from './componente/Ahorcadito';
 import PiedraPapelTijera from './componente/PiedraPapelTijera';
 import JuegoMemoria from './componente/JuegoMemoria';
-import JuegoPhaser from './componente/JuegoPhaser';
 import TaTeTi from './componente/Ta-Te-Ti';
+import MenuJuegoPhaser from './componente/MenuJuegoPhaser';
+import PhaserNivel1 from './componente/JuegoPhaserLv1';
+import PhaserNivel2 from './componente/JuegoPhaserLv2';
+import PhaserNivel3 from './componente/JuegoPhaserLv3';
 
 
 function Game() {
@@ -23,9 +26,12 @@ function Game() {
         <Route path='/MenuArkanoid' element={<MenuArkanoid/>}/>        
         <Route path='/Arkanoid1' element={<ArkanoidLv1/>}/>
         <Route path='/Arkanoid2' element={<ArkanoidLv2/>}/>
+        <Route path='/MenuJuegoPhaser' element={<MenuJuegoPhaser/>}/>        
+        <Route path='/Nivel1' element={<PhaserNivel1/>}/>
+        <Route path='/Nivel2' element={<PhaserNivel2/>}/>
+        <Route path='/BossBattle' element={<PhaserNivel3/>}/>
         <Route path='/JuegoMemoria' element={<JuegoMemoria/>}/>
         <Route path='/Ta-Te-Ti' element={<TaTeTi/>}/>
-        <Route path='/JuegoPhaser' element={<JuegoPhaser/>}/>
       </Routes>
     </Router>
     

@@ -32,7 +32,7 @@ export default function Home(){
                     <Link to='/Ta-Te-Ti' className="btn btn-principal" onClick={play}>Jugar Ta-Te-Ti</Link>
                 </Button>
                 <Button variant="outline-success" size="lg" >
-                    <Link to='/JuegoPhaser' className="btn btn-principal" onClick={play}>Jugar Super Galactic Spaceship</Link>
+                    <Link to='/MenuJuegoPhaser' className="btn btn-principal" onClick={play}>Jugar Super Galactic Spaceship</Link>
                 </Button> 
                 <Button variant="outline-danger" size="lg" >
                     <Link to='/desarrolladores' className="btn btn-principal" onClick={play}>Conocenos</Link>
