@@ -14,7 +14,6 @@ export default function DevsMain(props) {
                         <ListGroup.Item> Link de GitHub: {props.linkGit}</ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
-
         </Card>
     );
 }

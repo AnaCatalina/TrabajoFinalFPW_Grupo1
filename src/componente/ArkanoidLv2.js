@@ -1,13 +1,13 @@
-import Escene from "./JuegoArknoid/Escene";
-import Escene2 from "./JuegoArknoid/Escene2";
+import Escene from "./juegoArkanoid/Escene";
+import Escene2 from "./juegoArkanoid/Escene2";
 import sonido1 from '../sounds/sonido1.mp3';
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
-import Win from "./JuegoArknoid/Win";
-import Gameover from "./JuegoArknoid/GameOver";
-import Gameover2 from "./JuegoArknoid/GameOver2";
+import Win from "./juegoArkanoid/Win";
+import Gameover from "./juegoArkanoid/GameOver";
+import Gameover2 from "./juegoArkanoid/GameOver2";
 function Juego2(){
     
     function play(){
@@ -47,7 +47,7 @@ useEffect(() => {
 },[listo]);
     return(
         <Button variant="warning" >
-        <Link to='/MenuAknoid' className="btn btn-principal"  onClick={play}>Volver</Link>
+        <Link to='/MenuArkanoid' className="btn btn-principal"  onClick={play}>Volver</Link>
     </Button>
     )
 
