@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
-import WinLv1 from './JuegoPhaser/Menu2022/WinLv1';
-import WinLv2 from './JuegoPhaser/Menu2022/WinLv2';
-import Gameover from "./JuegoPhaser/Menu2022/GameOver";
+import WinLv1 from './JuegoPhaser/Menu/WinLv1';
+import WinLv2 from './JuegoPhaser/Menu/WinLv2';
+import WinLv3 from './JuegoPhaser/Menu/WinLv3';
+import Gameover from "./JuegoPhaser/Menu/GameOver";
+import Gameover2 from "./JuegoPhaser/Menu/GameOver2";
+import Gameover3 from "./JuegoPhaser/Menu/GameOver3";
 
 function Juego(){
     
@@ -32,7 +35,7 @@ useEffect(() => {
                 gravity: { x: 0 }
             }
         },
-        scene: [Escene, Gameover, WinLv1,Escene2,WinLv2,Escene3]    
+        scene: [Escene, Gameover, WinLv1,Escene2,WinLv2,Escene3,WinLv3,Gameover2,Gameover3]    
     };
    
     var game = new Phaser.Game(config);

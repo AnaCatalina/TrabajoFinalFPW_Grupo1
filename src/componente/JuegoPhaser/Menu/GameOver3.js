@@ -1,10 +1,10 @@
 import Phaser from "phaser";
-import {BotonResetGO} from "./BotonReiniciarGO";
+import {BotonReset} from "./BotonReiniciar";
 
-class Gameover extends Phaser.Scene{
+class Gameover3 extends Phaser.Scene{
     constructor(){
-        super({key:"GameOver"});
-        this.reset = new BotonResetGO(this);
+        super({key:"GameOver3"});
+        this.reset = new BotonReset(this);
     }
     preload(){
         this.load.image('Perder' ,"imagen/game over.jpg");
@@ -13,7 +13,7 @@ class Gameover extends Phaser.Scene{
     }
     create(){
         this.imagenLose = this.add.image(400,300,'Perder');
-        this.reset.crear();
+        this.reset.crearGO3();
         this.sonido3 = this.sound.add('gameOver');
         const soundConfig = {
             loop: false,
@@ -23,4 +23,4 @@ class Gameover extends Phaser.Scene{
         this.sonido3.play(soundConfig)
     }
 }
-export default Gameover;
+export default Gameover3;
