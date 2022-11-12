@@ -4,6 +4,8 @@ import GrupoDisparos from "./GrupoDisparos";
 var cantENEMIGOS = 15;
 var score = 0;
 var scoreText;
+var velBossY = 400;
+var cooldown = false;
 class Escene3 extends Phaser.Scene {
     constructor() {
         super({ key: 'Escene3' });
@@ -15,12 +17,14 @@ class Escene3 extends Phaser.Scene {
     vida = 100;
     puntos = 10;
     disparo = null;
+    
 
     preload() {
         this.load.image("fondo3", "imagen/juegoPhaser/background3.png");
         this.load.spritesheet("nave3", "imagen/juegoPhaser/nave3.png", { frameWidth: 69, frameHeight: 62 });
         this.load.image("boss", "imagen/juegoPhaser/boss.png");
         this.load.image("disparo", "imagen/juegoPhaser/shoot.png");
+        this.load.image("disparoJefe", "imagen/juegoPhaser/shootBoss.png");
         this.load.audio('nivel3', 'sonido/2022/nivel3.mp3');
         this.load.audio('sonidoDisparo', 'sonido/2022/gunShot.mp3');
         this.load.audio('explosion', 'sonido/2022/explosion.mp3');
@@ -37,7 +41,7 @@ class Escene3 extends Phaser.Scene {
             loop: true,
             volume: 0.6
         }
-
+        
         this.sonidoShot = this.sound.add('sonidoDisparo'), {
             loop: false
         }
@@ -74,7 +78,10 @@ class Escene3 extends Phaser.Scene {
         // Se crea la nave
         this.nave3 = this.physics.add.sprite(150, 300, "nave3").setImmovable();
 
+        
+
         this.jefe = this.physics.add.sprite(700, 300, "boss").setImmovable();
+        this.disparoDeJefe = this.physics.add.sprite(-100,-100,'disparoJefe')
         // Se cancela la gravedad
         this.nave3.body.allowGravity = false;
         this.nave3.setCollideWorldBounds(true);
@@ -99,16 +106,29 @@ class Escene3 extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.disparo, this.jefe, this.damageBoss, null, this);
-        //this.physics.add.collider(this.nave2, this.bomba, this.destroyJugador, null, this);
+        
 
     }
 
     moverJefe(){
-        this.jefe.y=this.nave3.y;
+        this.jefe.setVelocityY(velBossY);
+        if(this.jefe.y>=600){
+            velBossY = -400;
+        }
+        if(this.jefe.y<=0){
+            velBossY = 400;
+        }
+    }
+    dispararJefe(){
+        this.disparoDeJefe = this.physics.add.sprite(this.jefe.x,this.jefe.y,'disparoJefe').setImmovable();        
+        this.disparoDeJefe.setVelocityX(Phaser.Math.Between((-300),(-500)));
+        this.disparoDeJefe.setVelocityY((Phaser.Math.Between((-1),(1)))*30);
+        cooldown = true;
+        
     }
 
     disparar(){
-        this.disparo.realizarDisparo(this.nave3.x+43 , this.nave3.y)
+        this.disparo.realizarDisparo(this.nave3.x+43 , this.nave3.y);
         this.sonidoShot.play()
     }
 
@@ -126,10 +146,16 @@ class Escene3 extends Phaser.Scene {
         //disparo.disableBody(true, true);        
     }
 
-    destroyJugador(nave2, bomba) {
+    destroyJugador(nave3, disparoDeJefe) {
         this.sonidoImpacto.play()
         this.disminuirVida();
-        bomba.disableBody(true, true);
+        
+        
+        
+        
+        disparoDeJefe.disableBody(true);
+        disparoDeJefe.setVisible(false)
+        cooldown=false;
     }
 
     //Método que permite aumentar el puntaje
@@ -141,11 +167,11 @@ class Escene3 extends Phaser.Scene {
 
     //Método que permite disminuír la vida
     disminuirVida() {
-        this.vida = this.vida - this.puntos * 2.5;
+        this.vida = this.vida - 25;
         this.vidaEnTexto.setText('Vida: ' + this.vida + ' %');
         console.log(this.vida);
         if(this.vida <= 0){
-            this.mostrarGameover();
+            //this.mostrarGameover();
         }
     }
 
@@ -195,7 +221,17 @@ class Escene3 extends Phaser.Scene {
 
         });
 
+        
+        //this.jefe.setVelocityY(velBossY);
+        this.physics.add.collider(this.nave3, this.disparoDeJefe, this.destroyJugador, null, this);
         this.moverJefe();
+        
+        if(cooldown==false){
+            this.dispararJefe();
+        }
+        if((this.disparoDeJefe.x<400)||(this.disparoDeJefe.x<200)){
+            cooldown = false;
+        }
         /*if(this.puntaje == 150){
             this.felicitar();
         }*/

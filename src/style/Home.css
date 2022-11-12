@@ -1,9 +1,16 @@
 .home{
     text-align: center;
+    background-image: url(https://images6.alphacoders.com/967/967650.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    background-repeat: no-repeat;
 }
 
-img{
-    height: 400px;
+.img{
+    min-height: 20px;
+    size-adjust: auto;
     display: flex;
     padding: 10px;
     margin: 10px;
