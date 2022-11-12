@@ -26,10 +26,13 @@ export default function Home(){
                     <Link to='/MenuAknoid' className="btn btn-principal" onClick={play}>Jugar Arknoid</Link>
                 </Button>
                 <Button variant="outline-danger" size="lg" >
-                    <Link to='/Ta-Te-Ti' className="btn btn-principal" onClick={play}>Ta-Te-Ti</Link>
+                    <Link to='/JuegoMemoria' className="btn btn-principal" onClick={play}>Jugar Juego Memoria</Link>
                 </Button>
-                <Button variant="outline-danger" size="lg" >
-                    <Link to='/JuegoPhaser' className="btn btn-principal" onClick={play}>Jugar JuegoPhaser</Link>
+                <Button variant="outline-success" size="lg" >
+                    <Link to='/Ta-Te-Ti' className="btn btn-principal" onClick={play}>Jugar Ta-Te-Ti</Link>
+                </Button>
+                <Button variant="outline-success" size="lg" >
+                    <Link to='/JuegoPhaser' className="btn btn-principal" onClick={play}>Jugar Super Galactic Spaceship</Link>
                 </Button> 
                 <Button variant="outline-danger" size="lg" >
                     <Link to='/desarrolladores' className="btn btn-principal" onClick={play}>Conocenos</Link>
