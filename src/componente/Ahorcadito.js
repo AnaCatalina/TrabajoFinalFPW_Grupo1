@@ -1,7 +1,7 @@
 
 import diccionario from "../json/diccionario.json"
-import Juego from "../componente/juegoAhorcadito/Juego"
-import Tablero from "../componente/juegoAhorcadito/Tablero";
+import Juego from "../componente/JuegoAhorcadito/Juego"
+import Tablero from "../componente/JuegoAhorcadito/Tablero";
 import {  useEffect, useState } from "react";
 import "../style/Ahorcadito.css";
 import React from 'react';

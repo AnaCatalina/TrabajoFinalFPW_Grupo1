@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Boton from "../componente/juegoPPT/Boton";
-import Contador from "../componente/juegoPPT/Contador";
-import Resultado from "../componente/juegoPPT/Resultado";
+import Boton from "../componente/JuegoPPT/Boton";
+import Contador from "../componente/JuegoPPT/Contador";
+import Resultado from "../componente/JuegoPPT/Resultado";
 import { Link } from "react-router-dom";
 import "../style/Juego.css";
 import ImagenBase from "../img/juego/ImagenBase.png";
