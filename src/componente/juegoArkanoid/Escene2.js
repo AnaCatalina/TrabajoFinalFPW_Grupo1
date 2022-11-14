@@ -17,15 +17,15 @@ class Escene2 extends Phaser.Scene {
     sonido2 = null;
 
     preload() {
-        this.load.image("fondo2", "imagen/fondo2.png");
-        this.load.image("base2", "imagen/paddle2.png");
-        this.load.image("bloqueVerde", "imagen/green1.png");
-        this.load.image("bloqueNaranja", "imagen/orange1.png");
-        this.load.image("bloqueVioleta", "imagen/purple1.png");        
-        this.load.image("bloqueAzul", "imagen/blue1.png");
-        this.load.image("bloqueRojo", "imagen/red1.png");
-        this.load.image("bloqueAmarillo", "imagen/yellow1.png");
-        this.load.image("ball", "imagen/ball1.png");
+        this.load.image("fondo2", "imagen/arkanoid/fondo2.png");
+        this.load.image("base2", "imagen/arkanoid/paddle2.png");
+        this.load.image("bloqueVerde", "imagen/arkanoid/green1.png");
+        this.load.image("bloqueNaranja", "imagen/arkanoid/orange1.png");
+        this.load.image("bloqueVioleta", "imagen/arkanoid/purple1.png");        
+        this.load.image("bloqueAzul", "imagen/arkanoid/blue1.png");
+        this.load.image("bloqueRojo", "imagen/arkanoid/red1.png");
+        this.load.image("bloqueAmarillo", "imagen/arkanoid/yellow1.png");
+        this.load.image("ball", "imagen/arkanoid/ball1.png");
         this.load.audio('nivel2', 'sonido/level2.mp3')
 
     }

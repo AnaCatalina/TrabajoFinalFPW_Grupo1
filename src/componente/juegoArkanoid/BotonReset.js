@@ -4,7 +4,7 @@
     }
     precargar(){
         
-        this.escenaR.load.spritesheet('boton','imagen/BotonReinicio.png',{frameWidth: 200 ,frameHeight: 79});
+        this.escenaR.load.spritesheet('boton','imagen/arkanoid/BotonReinicio.png',{frameWidth: 200 ,frameHeight: 79});
     }
     crear(){
         this.botoninicio = this.escenaR.add.sprite(400,500,'boton').setInteractive();

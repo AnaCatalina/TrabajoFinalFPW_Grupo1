@@ -1,6 +1,6 @@
 [
     {
-        "perfil": "./img/desarrolladores/boccardo.png",
+        "perfil": "./imagen/desarrolladores/boccardo.png",
         "nombre": "Ana Catalina Boccardo",
         "edad": 20,
         "intereses": "Programar y animar videojuegos",
@@ -8,14 +8,14 @@
 
     },
     {
-        "perfil": "./img/desarrolladores/estrada.png",
+        "perfil": "./imagen/desarrolladores/estrada.png",
         "nombre": "Lautaro Estrada",
         "edad": 27,
         "intereses": "Softcombat, juegos de rol, manga anime, taekwondo y literatura",
         "linkGit": "https://github.com/estradalautaro"
     },
     {
-        "perfil": "./img/desarrolladores/farfan.jpg",
+        "perfil": "./imagen/desarrolladores/farfan.jpg",
         "nombre": "Javier Farfán",
         "edad": 22,
         "intereses": "Escalada, ajedrez, anime y videojuegos",
@@ -23,14 +23,14 @@
 
     },
     {
-        "perfil": "./img/desarrolladores/robles.jpg",
+        "perfil": "./imagen/desarrolladores/robles.jpg",
         "nombre": "Elias David Robles",
         "edad": 27,
         "intereses": "Historia y música de Videojuegos",
         "linkGit": "https://github.com/EliasDRobles"
     },
     {
-        "perfil": "./img/desarrolladores/valdez.png",
+        "perfil": "./imagen/desarrolladores/valdez.png",
         "nombre": "Fabian Valdez",
         "edad": 25,
         "intereses": "Jugar a la pelota con amigos",

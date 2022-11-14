@@ -1,9 +1,3 @@
-.mainDev img{
-    max-width: 300;
-    max-height: 300;
-    margin: auto;
-}
-
 .fondoDevs{
     background-image: url(../img/background.jpg);
 }
@@ -11,10 +5,13 @@
 .cardDev{
     text-align: center;
     min-width: 300px;
-    margin: auto;
-    margin-bottom: 25px;
+    min-height: 300px;
+    margin: 5px;
+    ;
 }
-
+.DevsMain{
+    margin: 50px;
+}
 .nameDev{
     background: linear-gradient(to left, rgb(197, 0, 0), rgb(252, 115, 42), rgb(197, 0, 0));
     padding: 0;

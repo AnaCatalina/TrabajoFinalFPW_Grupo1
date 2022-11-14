@@ -1,0 +1,22 @@
+.homeSGS{
+    text-align: center;
+    background-image: url(https://www.ejiltalk.org/wp-content/uploads/2021/03/pexels-photo-110854.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+}
+.homeSGS img{
+    margin: 20px;
+}
+.homeSGS h1{
+    color: whitesmoke;
+}
+.homeSGS button{
+    margin: 5px;
+}
+
+.space{
+    background-image: url(https://www.ejiltalk.org/wp-content/uploads/2021/03/pexels-photo-110854.jpeg);
+}

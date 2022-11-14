@@ -14,11 +14,11 @@ export default function MenuArknoid() {
             <h1>Arkanoid</h1>
             <img src={Inicio} alt="Juego" className="rounded mx-auto d-block" />
 
-            <div className="d-grid gap-2 col-6 mx-auto " >
-                <Button variant="outline-success" size="lg" >
+            <div className="d-grid gap-2 col-3 mx-auto " >
+            <Button variant="success" size="lg" >
                     <Link to='/Arkanoid1' className="btn btn-principal" onClick={play}>Jugar Nivel 1</Link>
                 </Button>
-                <Button variant="outline-danger" size="lg" >
+                <Button variant="success" size="lg" >
                     <Link to='/Arkanoid2' className="btn btn-principal" onClick={play}>Jugar Nivel 2</Link>
                 </Button>
 

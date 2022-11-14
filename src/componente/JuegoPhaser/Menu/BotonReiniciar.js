@@ -6,6 +6,8 @@ export class BotonReset {
 
         this.escenaR.load.spritesheet('botonR', 'imagen/juegoPhaser/menu/BotonReinicio.png', { frameWidth: 200, frameHeight: 79 });
         this.escenaR.load.spritesheet('botonN', 'imagen/juegoPhaser/menu/BotonSiguienteNivel.png', { frameWidth: 200, frameHeight: 79 });
+        this.escenaR.load.spritesheet('botonA', 'imagen/juegoPhaser/menu/BotonPlayAgain.png', { frameWidth: 200, frameHeight: 79 });
+        
     }
 
     /*---Se crea los botenes de victoria al ganar el nivel 1 */
@@ -72,7 +74,7 @@ export class BotonReset {
     /*---Se crea los botenes de victoria al ganar el nivel 3 */
     crear3() {
         this.botonReset = this.escenaR.add.sprite(250, 500, 'botonR').setInteractive();
-        this.botonNext = this.escenaR.add.sprite(550, 500, 'botonN').setInteractive();
+        this.botonNext = this.escenaR.add.sprite(550, 500, 'botonA').setInteractive();
 
         this.botonReset.on('pointerover', () => {
             this.botonReset.setFrame(1);

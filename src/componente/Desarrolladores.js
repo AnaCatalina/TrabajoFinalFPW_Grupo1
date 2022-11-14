@@ -1,4 +1,4 @@
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row, Button, Col, } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import "../style/desarrolladores.css"
 import React from "react";
@@ -8,14 +8,12 @@ import desarrolladores from "../json/desarrolladores.json"
 import sonido1 from '../sounds/sonido1.mp3';
 
 export default function Desarrolladores() {
-    function play(){
+    function play() {
         new Audio(sonido1).play();
     }
     return (
-        <Container className='fondoDevs'>
-            
-            <Row>
-
+        <Container fluid className='fondoDevs'>
+            <Row className="justify-content-md-center">
                 <HeaderDevs></HeaderDevs>
                 {desarrolladores.map(devs =>
                     <DevsMain
@@ -24,7 +22,6 @@ export default function Desarrolladores() {
                         edad={devs.edad}
                         intereses={devs.intereses}
                         linkGit={devs.linkGit}
-                        className="mainDev"
                     />
                 )}
             </Row>

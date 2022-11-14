@@ -2,12 +2,11 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import React from "react";
 
-
 export default function DevsMain(props) {
     return (
-        <Card style={{ width: '25rem' }} border="danger" className='cardDev'>
+        <Card style={{ width: '25rem', margin: '40px', padding: '0'}} border="danger" className='cardDev'>
                 <Card.Header className="nameDev" as="h4">{props.nombre}</Card.Header>
-                <Card.Img variant="top" src={props.perfil} className="fotoPerfil"  alt="fotoDePerfil"/>
+                <Card.Img style={{ height: 'auto',width: 'auto' }} variant="top" src={props.perfil} className="fotoPerfil"  alt="fotoDePerfil"/>
                 <Card.Body>
                     <ListGroup variant="flush">
                         <ListGroup.Item> Edad: {props.edad}</ListGroup.Item>

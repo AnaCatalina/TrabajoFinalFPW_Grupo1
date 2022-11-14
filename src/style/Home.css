@@ -8,10 +8,17 @@
     background-repeat: no-repeat;
 }
 
-.img{
+.home img{
     min-height: 20px;
     size-adjust: auto;
     display: flex;
     padding: 10px;
     margin: 10px;
+}
+
+.home h2{
+    color: whitesmoke;
+}
+.home button{
+    margin: 5px;
 }
